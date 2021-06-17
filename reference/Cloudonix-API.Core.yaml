@@ -149,6 +149,125 @@ paths:
                   dateOfBirth: '1996-08-24'
         description: Post the necessary fields for the API to create a new user.
       description: Create a new user.
+  /keys:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-keys
+      description: List Keys
+    post:
+      summary: ''
+      operationId: post-keys
+      responses:
+        '200':
+          description: OK
+      description: Create Key
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tenant:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    profile:
+                      type: string
+                domain:
+                  type: object
+                  properties:
+                    tenantId:
+                      type: number
+                    domain:
+                      type: string
+                    profile:
+                      type: object
+                      properties:
+                        authorization-api-key:
+                          type: string
+                        call-timeout:
+                          type: number
+                        registration-free-control-endpoint:
+                          type: string
+                        registration-free-control-endpoint-api-key:
+                          type: string
+                        allowed-border:
+                          type: boolean
+                        redirect-unknown-to-border:
+                          type: boolean
+                        subscribers-auto-progress:
+                          type:
+                            - string
+                            - boolean
+                        session-update-endpoint:
+                          type: string
+                        lcr-address:
+                          type: string
+                        allow-passthrough-caller-name:
+                          type: boolean
+                        allow-subscriber-authorized-calls:
+                          type: boolean
+                        messaging-notification-url:
+                          type: object
+                        "messaging-archive-bucket-name\t":
+                          type: string
+                        "cdr-endpoint\t":
+                          type:
+                            - string
+                            - array
+                          items:
+                            type: string
+                    active:
+                      type: boolean
+                    application:
+                      type: object
+                    aliases:
+                      type: object
+                application:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    url:
+                      type: string
+                    blocks:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          runtime:
+                            type: string
+                          code:
+                            type: string
+                subscriber:
+                  type: object
+                user:
+                  type: object
+                  properties:
+                    tenantId:
+                      type: number
+                    domainId:
+                      type: number
+                    email:
+                      type: string
+                    authProvider:
+                      type: string
+                active:
+                  type: boolean
+                name:
+                  type: string
+                keyId:
+                  type: string
+                secret:
+                  type: string
+                type:
+                  type: string
+        description: ''
 components:
   schemas:
     User:
