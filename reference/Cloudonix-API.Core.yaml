@@ -18,6 +18,7 @@ paths:
       responses: {}
       operationId: get-keys
       description: List Keys
+      security: []
     post:
       summary: ''
       operationId: post-keys
@@ -1173,8 +1174,12 @@ components:
   schemas: {}
   securitySchemes:
     XI5DD0E4A27C5848F89F483C9710082314:
-      name: Bearer
-      type: apiKey
-      in: header
+      type: http
+      scheme: bearer
+      description: Production Key
+    XIE98F00F415634B0A8E19AD807B3E4B6F:
+      type: http
+      scheme: basic
+      description: Staging Key
 security:
-  - API Staging Key: []
+  - XI5DD0E4A27C5848F89F483C9710082314: []
