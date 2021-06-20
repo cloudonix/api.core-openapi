@@ -11,144 +11,6 @@ servers:
   - url: 'https://api.cloudonix.io'
     description: Production
 paths:
-  '/users/{userId}':
-    parameters:
-      - schema:
-          type: integer
-        name: userId
-        in: path
-        required: true
-        description: Id of an existing user.
-    get:
-      summary: Get User Info by User ID
-      tags: []
-      responses:
-        '200':
-          description: User Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-              examples:
-                Get User Alice Smith:
-                  value:
-                    id: 142
-                    firstName: Alice
-                    lastName: Smith
-                    email: alice.smith@gmail.com
-                    dateOfBirth: '1997-10-31'
-                    emailVerified: true
-                    signUpDate: '2019-08-24'
-        '404':
-          description: User Not Found
-      operationId: get-users-userId
-      description: Retrieve the information of the user with the matching user ID.
-    patch:
-      summary: Update User Information
-      operationId: patch-users-userId
-      responses:
-        '200':
-          description: User Updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-              examples:
-                Updated User Rebecca Baker:
-                  value:
-                    id: 13
-                    firstName: Rebecca
-                    lastName: Baker
-                    email: rebecca@gmail.com
-                    dateOfBirth: '1985-10-02'
-                    emailVerified: false
-                    createDate: '2019-08-24'
-        '404':
-          description: User Not Found
-        '409':
-          description: Email Already Taken
-      description: Update the information of an existing user.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                firstName:
-                  type: string
-                lastName:
-                  type: string
-                email:
-                  type: string
-                  description: 'If a new email is given, the user''s email verified property will be set to false.'
-                dateOfBirth:
-                  type: string
-            examples:
-              Update First Name:
-                value:
-                  firstName: Rebecca
-              Update Email:
-                value:
-                  email: rebecca@gmail.com
-              Update Last Name & Date of Birth:
-                value:
-                  lastName: Baker
-                  dateOfBirth: '1985-10-02'
-        description: Patch user properties to update.
-  /user:
-    post:
-      summary: Create New User
-      operationId: post-user
-      responses:
-        '200':
-          description: User Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-              examples:
-                New User Bob Fellow:
-                  value:
-                    id: 12
-                    firstName: Bob
-                    lastName: Fellow
-                    email: bob.fellow@gmail.com
-                    dateOfBirth: '1996-08-24'
-                    emailVerified: false
-                    createDate: '2020-11-18'
-        '400':
-          description: Missing Required Information
-        '409':
-          description: Email Already Taken
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                firstName:
-                  type: string
-                lastName:
-                  type: string
-                email:
-                  type: string
-                dateOfBirth:
-                  type: string
-                  format: date
-              required:
-                - firstName
-                - lastName
-                - email
-                - dateOfBirth
-            examples:
-              Create User Bob Fellow:
-                value:
-                  firstName: Bob
-                  lastName: Fellow
-                  email: bob.fellow@gmail.com
-                  dateOfBirth: '1996-08-24'
-        description: Post the necessary fields for the API to create a new user.
-      description: Create a new user.
   /keys:
     get:
       summary: Your GET endpoint
@@ -168,145 +30,1137 @@ paths:
           application/json:
             schema:
               type: object
-              properties:
-                tenant:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    profile:
-                      type: string
-                domain:
-                  type: object
-                  properties:
-                    tenantId:
-                      type: number
-                    domain:
-                      type: string
-                    profile:
-                      type: object
-                      properties:
-                        authorization-api-key:
-                          type: string
-                        call-timeout:
-                          type: number
-                        registration-free-control-endpoint:
-                          type: string
-                        registration-free-control-endpoint-api-key:
-                          type: string
-                        allowed-border:
-                          type: boolean
-                        redirect-unknown-to-border:
-                          type: boolean
-                        subscribers-auto-progress:
-                          type:
-                            - string
-                            - boolean
-                        session-update-endpoint:
-                          type: string
-                        lcr-address:
-                          type: string
-                        allow-passthrough-caller-name:
-                          type: boolean
-                        allow-subscriber-authorized-calls:
-                          type: boolean
-                        messaging-notification-url:
-                          type: object
-                        "messaging-archive-bucket-name\t":
-                          type: string
-                        "cdr-endpoint\t":
-                          type:
-                            - string
-                            - array
-                          items:
-                            type: string
-                    active:
-                      type: boolean
-                    application:
-                      type: object
-                    aliases:
-                      type: object
-                application:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    url:
-                      type: string
-                    blocks:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                          runtime:
-                            type: string
-                          code:
-                            type: string
-                subscriber:
-                  type: object
-                user:
-                  type: object
-                  properties:
-                    tenantId:
-                      type: number
-                    domainId:
-                      type: number
-                    email:
-                      type: string
-                    authProvider:
-                      type: string
-                active:
-                  type: boolean
-                name:
-                  type: string
-                keyId:
-                  type: string
-                secret:
-                  type: string
-                type:
-                  type: string
+            examples:
+              example-1:
+                value: {}
         description: ''
+  /keys/<key-id>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-keys-key-id
+      description: Retrieve Key
+    patch:
+      summary: ''
+      operationId: patch-keys-key-id
+      responses:
+        '200':
+          description: OK
+      description: Update Key
+    delete:
+      summary: ''
+      operationId: delete-keys-key-id
+      responses:
+        '200':
+          description: OK
+      description: Delete Key
+  /tenants/<tenant-name>/keys:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-keys
+      description: List Tenant Keys
+    post:
+      summary: ''
+      operationId: post-tenants-tenant-name-keys
+      responses:
+        '200':
+          description: OK
+      description: Create Tenant Key
+  /tenants/<tenant-name>/keys/<key-id>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-keys-key-id
+      description: Retrieve Tenant Key
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name-keys-key-id
+      responses:
+        '200':
+          description: OK
+      description: Update Tenant Key
+    delete:
+      summary: ''
+      operationId: delete-tenants-tenant-name-keys-key-id
+      responses:
+        '200':
+          description: OK
+      description: Delete Tenant Key
+  /domains/<domain-name>/keys:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-domains-domain-name-keys
+      description: Retrieve Domain Keys
+    post:
+      summary: ''
+      operationId: post-domains-domain-name-keys
+      responses:
+        '200':
+          description: OK
+      description: Create Domain Key
+  /domains/<domain-name>/keys/<key-id>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-domains-domain-name-keys-key-id
+      description: Retrieve Domain Key
+    patch:
+      summary: ''
+      operationId: patch-domains-domain-name-keys-key-id
+      responses:
+        '200':
+          description: OK
+      description: Update Domain Key
+    delete:
+      summary: ''
+      operationId: delete-domains-domain-name-keys-key-id
+      responses:
+        '200':
+          description: OK
+      description: Delete Domain Key
+  /users:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-users
+      description: List Users
+    post:
+      summary: ''
+      operationId: post-users
+      responses:
+        '200':
+          description: OK
+      description: Create User
+  /users/<email>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-users-email
+      description: Retrieve User
+    patch:
+      summary: ''
+      operationId: patch-users-email
+      responses:
+        '200':
+          description: OK
+      description: Update User
+    delete:
+      summary: ''
+      operationId: delete-users-email
+      responses:
+        '200':
+          description: OK
+      description: Delete User
+  /tenants/<tenant-name>/users:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-users
+      description: List Tenant Users
+    post:
+      summary: ''
+      operationId: post-tenants-tenant-name-users
+      responses:
+        '200':
+          description: OK
+      description: Create Tenant User
+  /tenants/<tenant-name>/users/<email>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-users-email
+      description: Retrieve Tenant User
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name-users-email
+      responses:
+        '200':
+          description: OK
+      description: Update Tenant User
+    delete:
+      summary: ''
+      operationId: delete-tenants-tenant-name-users-email
+      responses:
+        '200':
+          description: OK
+      description: Delete Tenant User
+  /domains/<domain-name>/users:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-domains-domain-name-users
+      description: List Domain Users
+    post:
+      summary: ''
+      operationId: post-domains-domain-name-users
+      responses:
+        '200':
+          description: OK
+      description: Create Domain User
+  /domains/<domain-name>/users/<email>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-domains-domain-name-users-email
+      description: Retrieve Domain User
+    patch:
+      summary: ''
+      operationId: patch-domains-domain-name-users-email
+      responses:
+        '200':
+          description: OK
+      description: Update Domain User
+    delete:
+      summary: ''
+      operationId: delete-domains-domain-name-users-email
+      responses:
+        '200':
+          description: OK
+      description: Delete Domain User
+  /tenants:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants
+      description: List Tenants
+    post:
+      summary: ''
+      operationId: post-tenants
+      responses:
+        '200':
+          description: OK
+      description: Create Tenant
+  /tenants/<tenant-name>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name
+      description: Retrieve Tenant
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name
+      responses:
+        '200':
+          description: OK
+      description: Update Tenant
+    delete:
+      summary: ''
+      operationId: delete-tenants-tenant-name
+      responses:
+        '200':
+          description: OK
+      description: Delete Tenant
+  /applications:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-applications
+      description: List Applications
+    post:
+      summary: ''
+      operationId: post-applications
+      responses:
+        '200':
+          description: OK
+      description: Create Application
+  /applications/<application-name>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-applications-application-name
+      description: Retrieve Application
+    patch:
+      summary: ''
+      operationId: patch-applications-application-name
+      responses:
+        '200':
+          description: OK
+      description: Update Application
+    delete:
+      summary: ''
+      operationId: delete-applications-application-name
+      responses:
+        '200':
+          description: OK
+      description: Delete Application
+  /tenants/<tenant-name>/applications:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-applications
+      description: List Tenant Apps
+    post:
+      summary: ''
+      operationId: post-tenants-tenant-name-applications
+      responses:
+        '200':
+          description: OK
+      description: Create Tenant App
+  /tenants/<tenant-name>/applications/<application-name>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-applications-application-name
+      description: Retrieve Tenant App
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name-applications-application-name
+      responses:
+        '200':
+          description: OK
+      description: Update Tenant App
+    delete:
+      summary: ''
+      operationId: delete-tenants-tenant-name-applications-application-name
+      responses:
+        '200':
+          description: OK
+      description: Delete Tenant App
+  /applications/<application-name>/blocks:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-applications-application-name-blocks
+      description: List Blocks
+    post:
+      summary: ''
+      operationId: post-applications-application-name-blocks
+      responses:
+        '200':
+          description: OK
+      description: Create Block
+  /applications/<application-name>/blocks/<block>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-applications-application-name-blocks-block
+      description: Create Block
+    patch:
+      summary: ''
+      operationId: patch-applications-application-name-blocks-block
+      responses:
+        '200':
+          description: OK
+      description: Update Block
+    delete:
+      summary: ''
+      operationId: delete-applications-application-name-blocks-block
+      responses:
+        '200':
+          description: OK
+      description: Delete Block
+  /tenants/<tenant-name>/applications/<application-name>/blocks:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-applications-application-name-blocks
+      description: List Tenant Blocks
+    post:
+      summary: ''
+      operationId: post-tenants-tenant-name-applications-application-name-blocks
+      responses:
+        '200':
+          description: OK
+      description: Create Tenant Block
+  /tenants/<tenant-name>/applications/<application-name>/blocks/<block>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-applications-application-name-blocks-block
+      description: Retrieve Tenant Block
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name-applications-application-name-blocks-block
+      responses:
+        '200':
+          description: OK
+      description: Update Tenant Block
+    delete:
+      summary: ''
+      operationId: delete-tenants-tenant-name-applications-application-name-blocks-block
+      responses:
+        '200':
+          description: OK
+      description: Delete Tenant Block
+  /domains:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-domains
+      description: List Domains
+    post:
+      summary: ''
+      operationId: post-domains
+      responses:
+        '200':
+          description: OK
+      description: Create Domain
+  /domains/<domain>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-domains-domain
+      description: Retrieve Domain
+    patch:
+      summary: ''
+      operationId: patch-domains-domain
+      responses:
+        '200':
+          description: OK
+      description: Update Domain
+    delete:
+      summary: ''
+      operationId: delete-domains-domain
+      responses:
+        '200':
+          description: OK
+      description: Delete Domain
+  /tenants/<tenant-name>/domains:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains
+      description: List Tenant Domains
+    post:
+      summary: ''
+      operationId: post-tenants-tenant-name-domains
+      responses:
+        '200':
+          description: OK
+      description: Create Tenant Domain
+  /tenants/<tenant-name>/domains/<domain>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain
+      description: Retrieve Tenant Domain
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name-domains-domain
+      responses:
+        '200':
+          description: OK
+      description: Update Teant Domain
+    delete:
+      summary: ''
+      operationId: delete-tenants-tenant-name-domains-domain
+      responses:
+        '200':
+          description: OK
+      description: Delete Tenant Domain
+  /domains/<domain>/aliases:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-domains-domain-aliases
+      description: List Aliases
+    post:
+      summary: ''
+      operationId: post-domains-domain-aliases
+      responses:
+        '200':
+          description: OK
+      description: Create Alias
+  /domains/<domain>/aliases/<alias>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-domains-domain-aliases-alias
+      description: Retrieve Alias
+    patch:
+      summary: ''
+      operationId: patch-domains-domain-aliases-alias
+      responses:
+        '200':
+          description: OK
+      description: Update Alias
+    delete:
+      summary: ''
+      operationId: delete-domains-domain-aliases-alias
+      responses:
+        '200':
+          description: OK
+      description: Delete Alias
+  /tenants/<tenant-name>/domains/<domain>/aliases:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-aliases
+      description: List Tenant Aliases
+    post:
+      summary: ''
+      operationId: post-tenants-tenant-name-domains-domain-aliases
+      responses:
+        '200':
+          description: OK
+      description: Create Tenant Alias
+  /tenants/<tenant-name>/domains/<domain>/aliases/<alias>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-aliases-alias
+      description: Retrieve Tenant Alias
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name-domains-domain-aliases-alias
+      responses:
+        '200':
+          description: OK
+      description: Update Alias
+    delete:
+      summary: ''
+      operationId: delete-tenants-tenant-name-domains-domain-aliases-alias
+      responses:
+        '200':
+          description: OK
+      description: Delete Alias
+  /domains/<domain>/applications:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-domains-domain-applications
+      description: List Apps
+    post:
+      summary: ''
+      operationId: post-domains-domain-applications
+      responses:
+        '200':
+          description: OK
+      description: Create Apps
+  /domains/<domain>/applications/<application-name>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-domains-domain-applications-application-name
+      description: Retrieve App
+    patch:
+      summary: ''
+      operationId: patch-domains-domain-applications-application-name
+      responses:
+        '200':
+          description: OK
+      description: Update App
+    delete:
+      summary: ''
+      operationId: delete-domains-domain-applications-application-name
+      responses:
+        '200':
+          description: OK
+      description: Delete App
+  /tenants/<tenant-name>/domains/<domain>/applications:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-applications
+      description: List Tenant Apps
+    post:
+      summary: ''
+      operationId: post-tenants-tenant-name-domains-domain-applications
+      responses:
+        '200':
+          description: OK
+      description: Create Tenant App
+  /tenants/<tenant-name>/domains/<domain>/applications/<application-name>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-applications-application-name
+      description: Retrieve Tenant App
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name-domains-domain-applications-application-name
+      responses:
+        '200':
+          description: OK
+      description: Update Tenant App
+    delete:
+      summary: ''
+      operationId: delete-tenants-tenant-name-domains-domain-applications-application-name
+      responses:
+        '200':
+          description: OK
+      description: Delete Tenant App
+  /tenants/<tenant-name>/domains/<domain>/applications/<application-name>/subscribers/<subscriber-msisdn>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-applications-application-name-subscribers-subscriber-msisdn
+      description: Retrieve subscriber msisdn
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name-domains-domain-applications-application-name-subscribers-subscriber-msisdn
+      responses:
+        '200':
+          description: OK
+      description: Update subscriber msisdn
+    delete:
+      summary: ''
+      operationId: delete-tenants-tenant-name-domains-domain-applications-application-name-subscribers-subscriber-msisdn
+      responses:
+        '200':
+          description: OK
+      description: Delete subscriber msisdn
+  /domains/<domain>/dnids:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-domains-domain-dnids
+      description: List dnids
+    post:
+      summary: ''
+      operationId: post-domains-domain-dnids
+      responses:
+        '200':
+          description: OK
+      description: Create dnid
+  /domains/<domain>/dnids/<dnid>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-domains-domain-dnids-dnid
+      description: Retrieve dnid
+    patch:
+      summary: ''
+      operationId: patch-domains-domain-dnids-dnid
+      responses:
+        '200':
+          description: OK
+      description: Update dnid
+    delete:
+      summary: ''
+      operationId: delete-domains-domain-dnids-dnid
+      responses:
+        '200':
+          description: OK
+      description: Delete dnid
+  /tenants/<tenant-name>/domains/<domain>/dnids:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-dnids
+      description: List Tenant dnids
+    post:
+      summary: ''
+      operationId: post-tenants-tenant-name-domains-domain-dnids
+      responses:
+        '200':
+          description: OK
+      description: Create Tenant dnids
+  /tenants/<tenant-name>/domains/<domain>/dnids/<dnid>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-dnids-dnid
+      description: Retrieve Tenant dnid
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name-domains-domain-dnids-dnid
+      responses:
+        '200':
+          description: OK
+      description: Update Tenant dnid
+    delete:
+      summary: ''
+      operationId: delete-tenants-tenant-name-domains-domain-dnids-dnid
+      responses:
+        '200':
+          description: OK
+      description: Delete Tenant dnid
+  /tenants/<tenant-name>/domains/<domain>/applications/<application-name>/dnids:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-applications-application-name-dnids
+      description: List App dnids
+    post:
+      summary: ''
+      operationId: post-tenants-tenant-name-domains-domain-applications-application-name-dnids
+      responses:
+        '200':
+          description: OK
+      description: Create App dnid
+  /tenants/<tenant-name>/domains/<domain>/applications/<application-name>/dnids/<dnid>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-applications-application-name-dnids-dnid
+      description: Retrieve App dnid
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name-domains-domain-applications-application-name-dnids-dnid
+      responses:
+        '200':
+          description: OK
+      description: Update App dnid
+    delete:
+      summary: ''
+      operationId: delete-tenants-tenant-name-domains-domain-applications-application-name-dnids-dnid
+      responses:
+        '200':
+          description: OK
+      description: Delete App dnid
+  /domains/<domain>/trunks:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-domains-domain-trunks
+      description: List Domain trunks
+    post:
+      summary: ''
+      operationId: post-domains-domain-trunks
+      responses:
+        '200':
+          description: OK
+      description: Create Domain Trunk
+  /domains/<domain>/trunks/<trunk-name>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-domains-domain-trunks-trunk-name
+      description: Retrieve Domain Trunk
+    patch:
+      summary: ''
+      operationId: patch-domains-domain-trunks-trunk-name
+      responses:
+        '200':
+          description: OK
+      description: Update Domain Trunk
+    delete:
+      summary: ''
+      operationId: delete-domains-domain-trunks-trunk-name
+      responses:
+        '200':
+          description: OK
+      description: Delete Domain Trunk
+  /tenants/<tenant-name>/domains/<domain>/trunks:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-trunks
+      description: List Tenant Domain Trunks
+    post:
+      summary: ''
+      operationId: post-tenants-tenant-name-domains-domain-trunks
+      responses:
+        '200':
+          description: OK
+      description: Create Tenant Domain Trunk
+  /tenants/<tenant-name>/domains/<domain>/trunks/<trunk-name>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-trunks-trunk-name
+      description: Retrieve Tenant Domain Trunk
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name-domains-domain-trunks-trunk-name
+      responses:
+        '200':
+          description: OK
+      description: Update Tenant Domain Trunk
+    delete:
+      summary: ''
+      operationId: delete-tenants-tenant-name-domains-domain-trunks-trunk-name
+      responses:
+        '200':
+          description: OK
+      description: Delete Tenant Domain Trunk
+  /trunks:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-trunks
+      description: List Trunks
+    post:
+      summary: ''
+      operationId: post-trunks
+      responses:
+        '200':
+          description: OK
+      description: Create Trunk
+  /trunks/<trunk-name>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-trunks-trunk-name
+      description: Retrieve Trunk
+    patch:
+      summary: ''
+      operationId: patch-trunks-trunk-name
+      responses:
+        '200':
+          description: OK
+      description: Update Trunk
+    delete:
+      summary: ''
+      operationId: delete-trunks-trunk-name
+      responses:
+        '200':
+          description: OK
+      description: Delete Trunk
+  /tenants/<tenant-name>/trunks:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-trunks
+      description: List Tenant Trunks
+    post:
+      summary: ''
+      operationId: post-tenants-tenant-name-trunks
+      responses:
+        '200':
+          description: OK
+      description: Create Tenant Trunk
+  /tenants/<tenant-name>/trunks/<trunk-name>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-trunks-trunk-name
+      description: Retrieve Teant Trunk
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name-trunks-trunk-name
+      responses:
+        '200':
+          description: OK
+      description: Uppdate Tenant Trunk
+    delete:
+      summary: ''
+      operationId: delete-tenants-tenant-name-trunks-trunk-name
+      responses:
+        '200':
+          description: OK
+      description: Delete Tenant Trunk
+  /domains/<domain>/subscribers:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-domains-domain-subscribers
+      description: List subscribers
+    post:
+      summary: ''
+      operationId: post-domains-domain-subscribers
+      responses:
+        '200':
+          description: OK
+      description: Create subscriber
+  /domains/<domain>/subscribers/<msisdn>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-domains-domain-subscribers-msisdn
+      description: Retrieve subscriber
+    parameters: []
+    patch:
+      summary: ''
+      operationId: patch-domains-domain-subscribers-msisdn
+      responses:
+        '200':
+          description: OK
+      description: Update subscriber
+    delete:
+      summary: ''
+      operationId: delete-domains-domain-subscribers-msisdn
+      responses:
+        '200':
+          description: OK
+      description: Delete subscriber
+  /tenants/<tenant-name>/domains/<domain>/subscribers:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-subscribers
+      description: List Tenant Subscribers
+    post:
+      summary: ''
+      operationId: post-tenants-tenant-name-domains-domain-subscribers
+      responses:
+        '200':
+          description: OK
+      description: Create Tenant Subscriber
+  /tenants/<tenant-name>/domains/<domain>/subscribers/<msisdn>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-subscribers-msisdn
+      description: Retrieve Tenant Subscriber
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name-domains-domain-subscribers-msisdn
+      responses:
+        '200':
+          description: OK
+      description: Update Tenant Subscriber
+    delete:
+      summary: ''
+      operationId: delete-tenants-tenant-name-domains-domain-subscribers-msisdn
+      responses:
+        '200':
+          description: OK
+      description: Delete Tenant Subscriber
+  /calls/<domain>/sessions:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-calls-domain-sessions
+      description: List sessions
+    post:
+      summary: ''
+      operationId: post-calls-domain-sessions
+      responses:
+        '200':
+          description: OK
+      description: Create session
+  /calls/<domain>/sessions/<token>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-calls-domain-sessions-token
+      description: Retrieve session
+    patch:
+      summary: ''
+      operationId: patch-calls-domain-sessions-token
+      responses:
+        '200':
+          description: OK
+      description: Update session
+    delete:
+      summary: ''
+      operationId: delete-calls-domain-sessions-token
+      responses:
+        '200':
+          description: OK
+      description: Delete session
+  /calls/<domain>/incoming:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-calls-domain-incoming
+      description: List incoming calls
+    post:
+      summary: ''
+      operationId: post-calls-domain-incoming
+      responses:
+        '200':
+          description: OK
+      description: Create incoming call
+  /calls/<domain>/incoming/<token>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-calls-domain-incoming-token
+      description: Retrieve incoming call
+    patch:
+      summary: ''
+      operationId: patch-calls-domain-incoming-token
+      responses:
+        '200':
+          description: OK
+      description: Update incoming call
+    delete:
+      summary: ''
+      operationId: delete-calls-domain-incoming-token
+      responses:
+        '200':
+          description: OK
+      description: Delete incoming call
+  /calls/<domain>/outgoing:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-calls-domain-outgoing
+      description: List outgoing calls
+    post:
+      summary: ''
+      operationId: post-calls-domain-outgoing
+      responses:
+        '200':
+          description: OK
+      description: Create outgoing call
+  /calls/<domain>/outgoing/<token>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-calls-domain-outgoing-token
+      description: Retrieve outgoing call
+    patch:
+      summary: ''
+      operationId: patch-calls-domain-outgoing-token
+      responses:
+        '200':
+          description: OK
+      description: Update outgoing call
+    delete:
+      summary: ''
+      operationId: delete-calls-domain-outgoing-token
+      responses:
+        '200':
+          description: OK
+      description: Delete outgoing call
+  /calls/<domain>/application:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-calls-domain-application
+      description: List Apps
+    post:
+      summary: ''
+      operationId: post-calls-domain-application
+      responses:
+        '200':
+          description: OK
+      description: Create App
+  /calls/<domain>/application/<token>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-calls-domain-application-token
+      description: Retrieve App
+    patch:
+      summary: ''
+      operationId: patch-calls-domain-application-token
+      responses:
+        '200':
+          description: OK
+      description: Update App
+    delete:
+      summary: ''
+      operationId: delete-calls-domain-application-token
+      responses:
+        '200':
+          description: OK
+      description: Delete App
+  /calls/<domain>/converences:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-calls-domain-converences
+      description: List converences
+    post:
+      summary: ''
+      operationId: post-calls-domain-converences
+      responses:
+        '200':
+          description: OK
+      description: Create converences
+  /calls/<domain>/converences/<name>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-calls-domain-converences-name
+      description: Retrieve converence
+    patch:
+      summary: ''
+      operationId: patch-calls-domain-converences-name
+      responses:
+        '200':
+          description: OK
+      description: Update converence
+    delete:
+      summary: ''
+      operationId: delete-calls-domain-converences-name
+      responses:
+        '200':
+          description: OK
+      description: Delete converence
+  /tenants/<tenant-name>/domains/<domain>/conferences:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-conferences
+      description: List conferences
+    post:
+      summary: ''
+      operationId: post-tenants-tenant-name-domains-domain-conferences
+      responses:
+        '200':
+          description: OK
+      description: Retrieve Conference
+  /tenants/<tenant-name>/domains/<domain>/conferences/<name>:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-conferences-name
+      description: Retrieve Conference
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name-domains-domain-conferences-name
+      responses:
+        '200':
+          description: OK
+      description: Update Conference
+    delete:
+      summary: ''
+      operationId: delete-tenants-tenant-name-domains-domain-conferences-name
+      responses:
+        '200':
+          description: OK
+      description: Delete Conference
 components:
-  schemas:
-    User:
-      title: User
-      type: object
-      description: ''
-      examples:
-        - id: 142
-          firstName: Alice
-          lastName: Smith
-          email: alice.smith@gmail.com
-          dateOfBirth: '1997-10-31'
-          emailVerified: true
-          signUpDate: '2019-08-24'
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the given user.
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        dateOfBirth:
-          type: string
-          format: date
-          example: '1997-10-31'
-        emailVerified:
-          type: boolean
-          description: Set to true if the user's email has been verified.
-        createDate:
-          type: string
-          format: date
-          description: The date that the user was created.
-      required:
-        - id
-        - firstName
-        - lastName
-        - email
-        - emailVerified
+  schemas: {}
