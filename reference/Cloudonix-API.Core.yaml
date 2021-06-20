@@ -3,9 +3,9 @@ info:
   title: Cloudonix API.Core
   version: '1.0'
   summary: Cloudonix REST API
+  description: ''
+  license: {}
 servers:
-  - url: 'http://localhost:3080'
-    description: Local Host
   - url: 'https://api.staging.cloudonix.io'
     description: Staging
   - url: 'https://api.cloudonix.io'
@@ -279,6 +279,13 @@ paths:
         '200':
           description: OK
       description: Create Application
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    parameters: []
   /applications/<application-name>:
     get:
       summary: Your GET endpoint
@@ -1164,3 +1171,10 @@ paths:
       description: Delete Conference
 components:
   schemas: {}
+  securitySchemes:
+    XI5DD0E4A27C5848F89F483C9710082314:
+      name: Bearer
+      type: apiKey
+      in: header
+security:
+  - API Staging Key: []
