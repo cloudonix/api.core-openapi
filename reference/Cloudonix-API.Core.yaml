@@ -6,7 +6,7 @@ info:
   description: ''
   license: {}
 servers:
-  - url: 'https://api.staging.cloudonix.io'
+  - url: 'http://api.staging.cloudonix.io'
     description: Staging
   - url: 'https://api.cloudonix.io'
     description: Production
@@ -18,7 +18,7 @@ paths:
       responses: {}
       operationId: get-keys
       description: List Keys
-      security: []
+      parameters: []
     post:
       summary: ''
       operationId: post-keys
@@ -35,7 +35,7 @@ paths:
               example-1:
                 value: {}
         description: ''
-  /keys/<key-id>:
+  /keys/{key-id}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -56,7 +56,7 @@ paths:
         '200':
           description: OK
       description: Delete Key
-  /tenants/<tenant-name>/keys:
+  /tenants/{tenant-name}/keys:
     get:
       summary: Your GET endpoint
       tags: []
@@ -70,7 +70,7 @@ paths:
         '200':
           description: OK
       description: Create Tenant Key
-  /tenants/<tenant-name>/keys/<key-id>:
+  /tenants/{tenant-name}/keys/{key-id}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -91,7 +91,7 @@ paths:
         '200':
           description: OK
       description: Delete Tenant Key
-  /domains/<domain-name>/keys:
+  /domains/{domain-name}/keys:
     get:
       summary: Your GET endpoint
       tags: []
@@ -105,7 +105,7 @@ paths:
         '200':
           description: OK
       description: Create Domain Key
-  /domains/<domain-name>/keys/<key-id>:
+  /domains/{domain-name}/keys/{key-id}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -140,7 +140,7 @@ paths:
         '200':
           description: OK
       description: Create User
-  /users/<email>:
+  /users/{email}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -161,7 +161,7 @@ paths:
         '200':
           description: OK
       description: Delete User
-  /tenants/<tenant-name>/users:
+  /tenants/{tenant-name}/users:
     get:
       summary: Your GET endpoint
       tags: []
@@ -175,7 +175,7 @@ paths:
         '200':
           description: OK
       description: Create Tenant User
-  /tenants/<tenant-name>/users/<email>:
+  /tenants/{tenant-name}/users/{email}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -196,7 +196,7 @@ paths:
         '200':
           description: OK
       description: Delete Tenant User
-  /domains/<domain-name>/users:
+  /domains/{domain-name}/users:
     get:
       summary: Your GET endpoint
       tags: []
@@ -210,7 +210,7 @@ paths:
         '200':
           description: OK
       description: Create Domain User
-  /domains/<domain-name>/users/<email>:
+  /domains/{domain-name}/users/{email}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -245,7 +245,7 @@ paths:
         '200':
           description: OK
       description: Create Tenant
-  /tenants/<tenant-name>:
+  /tenants/{tenant-name}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -287,7 +287,7 @@ paths:
               type: object
               properties: {}
     parameters: []
-  /applications/<application-name>:
+  /applications/{application-name}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -308,7 +308,7 @@ paths:
         '200':
           description: OK
       description: Delete Application
-  /tenants/<tenant-name>/applications:
+  /tenants/{tenant-name}/applications:
     get:
       summary: Your GET endpoint
       tags: []
@@ -322,7 +322,7 @@ paths:
         '200':
           description: OK
       description: Create Tenant App
-  /tenants/<tenant-name>/applications/<application-name>:
+  /tenants/{tenant-name}/applications/{application-name}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -343,7 +343,7 @@ paths:
         '200':
           description: OK
       description: Delete Tenant App
-  /applications/<application-name>/blocks:
+  /applications/{application-name}/blocks:
     get:
       summary: Your GET endpoint
       tags: []
@@ -357,7 +357,7 @@ paths:
         '200':
           description: OK
       description: Create Block
-  /applications/<application-name>/blocks/<block>:
+  /applications/{application-name}/blocks/{block}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -378,7 +378,7 @@ paths:
         '200':
           description: OK
       description: Delete Block
-  /tenants/<tenant-name>/applications/<application-name>/blocks:
+  /tenants/{tenant-name}/applications/{application-name}/blocks:
     get:
       summary: Your GET endpoint
       tags: []
@@ -392,7 +392,7 @@ paths:
         '200':
           description: OK
       description: Create Tenant Block
-  /tenants/<tenant-name>/applications/<application-name>/blocks/<block>:
+  /tenants/{tenant-name}/applications/{application-name}/blocks/{block}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -427,7 +427,7 @@ paths:
         '200':
           description: OK
       description: Create Domain
-  /domains/<domain>:
+  /domains/{domain}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -448,7 +448,7 @@ paths:
         '200':
           description: OK
       description: Delete Domain
-  /tenants/<tenant-name>/domains:
+  /tenants/{tenant-name}/domains:
     get:
       summary: Your GET endpoint
       tags: []
@@ -462,7 +462,7 @@ paths:
         '200':
           description: OK
       description: Create Tenant Domain
-  /tenants/<tenant-name>/domains/<domain>:
+  /tenants/{tenant-name}/domains/{domain}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -483,7 +483,7 @@ paths:
         '200':
           description: OK
       description: Delete Tenant Domain
-  /domains/<domain>/aliases:
+  /domains/{domain}/aliases:
     get:
       summary: Your GET endpoint
       tags: []
@@ -497,7 +497,7 @@ paths:
         '200':
           description: OK
       description: Create Alias
-  /domains/<domain>/aliases/<alias>:
+  /domains/{domain}/aliases/{alias}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -518,7 +518,7 @@ paths:
         '200':
           description: OK
       description: Delete Alias
-  /tenants/<tenant-name>/domains/<domain>/aliases:
+  /tenants/{tenant-name}/domains/{domain}/aliases:
     get:
       summary: Your GET endpoint
       tags: []
@@ -532,7 +532,7 @@ paths:
         '200':
           description: OK
       description: Create Tenant Alias
-  /tenants/<tenant-name>/domains/<domain>/aliases/<alias>:
+  /tenants/{tenant-name}/domains/{domain}/aliases/{alias}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -553,7 +553,7 @@ paths:
         '200':
           description: OK
       description: Delete Alias
-  /domains/<domain>/applications:
+  /domains/{domain}/applications:
     get:
       summary: Your GET endpoint
       tags: []
@@ -567,7 +567,7 @@ paths:
         '200':
           description: OK
       description: Create Apps
-  /domains/<domain>/applications/<application-name>:
+  /domains/{domain}/applications/{application-name}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -588,7 +588,7 @@ paths:
         '200':
           description: OK
       description: Delete App
-  /tenants/<tenant-name>/domains/<domain>/applications:
+  /tenants/{tenant-name}/domains/{domain}/applications:
     get:
       summary: Your GET endpoint
       tags: []
@@ -602,7 +602,7 @@ paths:
         '200':
           description: OK
       description: Create Tenant App
-  /tenants/<tenant-name>/domains/<domain>/applications/<application-name>:
+  /tenants/{tenant-name}/domains/{domain}/applications/{application-name}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -623,7 +623,7 @@ paths:
         '200':
           description: OK
       description: Delete Tenant App
-  /tenants/<tenant-name>/domains/<domain>/applications/<application-name>/subscribers/<subscriber-msisdn>:
+  /tenants/{tenant-name}/domains/{domain}/applications/{application-name}/subscribers/{subscriber-msisdn}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -644,7 +644,7 @@ paths:
         '200':
           description: OK
       description: Delete subscriber msisdn
-  /domains/<domain>/dnids:
+  /domains/{domain}/dnids:
     get:
       summary: Your GET endpoint
       tags: []
@@ -658,7 +658,7 @@ paths:
         '200':
           description: OK
       description: Create dnid
-  /domains/<domain>/dnids/<dnid>:
+  /domains/{domain}/dnids/{dnid}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -679,7 +679,7 @@ paths:
         '200':
           description: OK
       description: Delete dnid
-  /tenants/<tenant-name>/domains/<domain>/dnids:
+  /tenants/{tenant-name}/domains/{domain}/dnids:
     get:
       summary: Your GET endpoint
       tags: []
@@ -693,7 +693,7 @@ paths:
         '200':
           description: OK
       description: Create Tenant dnids
-  /tenants/<tenant-name>/domains/<domain>/dnids/<dnid>:
+  /tenants/{tenant-name}/domains/{domain}/dnids/{dnid}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -714,7 +714,7 @@ paths:
         '200':
           description: OK
       description: Delete Tenant dnid
-  /tenants/<tenant-name>/domains/<domain>/applications/<application-name>/dnids:
+  /tenants/{tenant-name}/domains/{domain}/applications/{application-name}/dnids:
     get:
       summary: Your GET endpoint
       tags: []
@@ -728,7 +728,7 @@ paths:
         '200':
           description: OK
       description: Create App dnid
-  /tenants/<tenant-name>/domains/<domain>/applications/<application-name>/dnids/<dnid>:
+  /tenants/{tenant-name}/domains/{domain}/applications/{application-name}/dnids/{dnid}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -749,7 +749,7 @@ paths:
         '200':
           description: OK
       description: Delete App dnid
-  /domains/<domain>/trunks:
+  /domains/{domain}/trunks:
     get:
       summary: Your GET endpoint
       tags: []
@@ -763,7 +763,7 @@ paths:
         '200':
           description: OK
       description: Create Domain Trunk
-  /domains/<domain>/trunks/<trunk-name>:
+  '/domains/{domain}/trunks/{trunk-name}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -784,7 +784,18 @@ paths:
         '200':
           description: OK
       description: Delete Domain Trunk
-  /tenants/<tenant-name>/domains/<domain>/trunks:
+    parameters:
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: trunk-name
+        in: path
+        required: true
+  /tenants/{tenant-name}/domains/{domain}/trunks:
     get:
       summary: Your GET endpoint
       tags: []
@@ -798,7 +809,7 @@ paths:
         '200':
           description: OK
       description: Create Tenant Domain Trunk
-  /tenants/<tenant-name>/domains/<domain>/trunks/<trunk-name>:
+  /tenants/{tenant-name}/domains/{domain}/trunks/{trunk-name}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -833,7 +844,7 @@ paths:
         '200':
           description: OK
       description: Create Trunk
-  /trunks/<trunk-name>:
+  /trunks/{trunk-name}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -854,7 +865,7 @@ paths:
         '200':
           description: OK
       description: Delete Trunk
-  /tenants/<tenant-name>/trunks:
+  /tenants/{tenant-name}/trunks:
     get:
       summary: Your GET endpoint
       tags: []
@@ -868,7 +879,7 @@ paths:
         '200':
           description: OK
       description: Create Tenant Trunk
-  /tenants/<tenant-name>/trunks/<trunk-name>:
+  /tenants/{tenant-name}/trunks/{trunk-name}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -889,7 +900,7 @@ paths:
         '200':
           description: OK
       description: Delete Tenant Trunk
-  /domains/<domain>/subscribers:
+  /domains/{domain}/subscribers:
     get:
       summary: Your GET endpoint
       tags: []
@@ -903,7 +914,7 @@ paths:
         '200':
           description: OK
       description: Create subscriber
-  /domains/<domain>/subscribers/<msisdn>:
+  /domains/{domain}/subscribers/{msisdn}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -925,7 +936,7 @@ paths:
         '200':
           description: OK
       description: Delete subscriber
-  /tenants/<tenant-name>/domains/<domain>/subscribers:
+  /tenants/{tenant-name}/domains/{domain}/subscribers:
     get:
       summary: Your GET endpoint
       tags: []
@@ -939,7 +950,7 @@ paths:
         '200':
           description: OK
       description: Create Tenant Subscriber
-  /tenants/<tenant-name>/domains/<domain>/subscribers/<msisdn>:
+  /tenants/{tenant-name}/domains/{domain}/subscribers/{msisdn}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -960,7 +971,7 @@ paths:
         '200':
           description: OK
       description: Delete Tenant Subscriber
-  /calls/<domain>/sessions:
+  /calls/{domain}/sessions:
     get:
       summary: Your GET endpoint
       tags: []
@@ -974,7 +985,7 @@ paths:
         '200':
           description: OK
       description: Create session
-  /calls/<domain>/sessions/<token>:
+  /calls/{domain}/sessions/{token}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -995,7 +1006,7 @@ paths:
         '200':
           description: OK
       description: Delete session
-  /calls/<domain>/incoming:
+  /calls/{domain}/incoming:
     get:
       summary: Your GET endpoint
       tags: []
@@ -1009,7 +1020,7 @@ paths:
         '200':
           description: OK
       description: Create incoming call
-  /calls/<domain>/incoming/<token>:
+  /calls/{domain}/incoming/{token}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -1030,7 +1041,7 @@ paths:
         '200':
           description: OK
       description: Delete incoming call
-  /calls/<domain>/outgoing:
+  /calls/{domain}/outgoing:
     get:
       summary: Your GET endpoint
       tags: []
@@ -1044,7 +1055,7 @@ paths:
         '200':
           description: OK
       description: Create outgoing call
-  /calls/<domain>/outgoing/<token>:
+  /calls/{domain}/outgoing/{token}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -1065,7 +1076,7 @@ paths:
         '200':
           description: OK
       description: Delete outgoing call
-  /calls/<domain>/application:
+  /calls/{domain}/application:
     get:
       summary: Your GET endpoint
       tags: []
@@ -1079,7 +1090,7 @@ paths:
         '200':
           description: OK
       description: Create App
-  /calls/<domain>/application/<token>:
+  /calls/{domain}/application/{token}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -1100,7 +1111,7 @@ paths:
         '200':
           description: OK
       description: Delete App
-  /calls/<domain>/converences:
+  /calls/{domain}/converences:
     get:
       summary: Your GET endpoint
       tags: []
@@ -1114,7 +1125,7 @@ paths:
         '200':
           description: OK
       description: Create converences
-  /calls/<domain>/converences/<name>:
+  /calls/{domain}/converences/{name}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -1135,7 +1146,7 @@ paths:
         '200':
           description: OK
       description: Delete converence
-  /tenants/<tenant-name>/domains/<domain>/conferences:
+  /tenants/{tenant-name}/domains/{domain}/conferences:
     get:
       summary: Your GET endpoint
       tags: []
@@ -1149,7 +1160,7 @@ paths:
         '200':
           description: OK
       description: Retrieve Conference
-  /tenants/<tenant-name>/domains/<domain>/conferences/<name>:
+  /tenants/{tenant-name}/domains/{domain}/conferences/{name}:
     get:
       summary: Your GET endpoint
       tags: []
@@ -1173,13 +1184,10 @@ paths:
 components:
   schemas: {}
   securitySchemes:
-    XI5DD0E4A27C5848F89F483C9710082314:
-      type: http
-      scheme: bearer
-      description: Production Key
-    XIE98F00F415634B0A8E19AD807B3E4B6F:
-      type: http
-      scheme: basic
-      description: Staging Key
+    staging-key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: User API key for the staging from cockpit
 security:
-  - XI5DD0E4A27C5848F89F483C9710082314: []
+  - staging-key: []
