@@ -31,11 +31,14 @@ paths:
           application/json:
             schema:
               type: object
+              properties:
+                name:
+                  type: string
             examples:
               example-1:
                 value: {}
         description: ''
-  /keys/{key-id}:
+  '/keys/{key-id}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -49,6 +52,16 @@ paths:
         '200':
           description: OK
       description: Update Key
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                active:
+                  type: boolean
     delete:
       summary: ''
       operationId: delete-keys-key-id
@@ -56,7 +69,7 @@ paths:
         '200':
           description: OK
       description: Delete Key
-  /tenants/{tenant-name}/keys:
+  '/tenants/{tenant-name}/keys':
     get:
       summary: Your GET endpoint
       tags: []
@@ -70,7 +83,15 @@ paths:
         '200':
           description: OK
       description: Create Tenant Key
-  /tenants/{tenant-name}/keys/{key-id}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+  '/tenants/{tenant-name}/keys/{key-id}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -84,6 +105,16 @@ paths:
         '200':
           description: OK
       description: Update Tenant Key
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                active:
+                  type: boolean
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name-keys-key-id
@@ -91,7 +122,7 @@ paths:
         '200':
           description: OK
       description: Delete Tenant Key
-  /domains/{domain-name}/keys:
+  '/domains/{domain-name}/keys':
     get:
       summary: Your GET endpoint
       tags: []
@@ -105,7 +136,15 @@ paths:
         '200':
           description: OK
       description: Create Domain Key
-  /domains/{domain-name}/keys/{key-id}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+  '/domains/{domain-name}/keys/{key-id}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -119,6 +158,16 @@ paths:
         '200':
           description: OK
       description: Update Domain Key
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                active:
+                  type: boolean
     delete:
       summary: ''
       operationId: delete-domains-domain-name-keys-key-id
@@ -140,7 +189,15 @@ paths:
         '200':
           description: OK
       description: Create User
-  /users/{email}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+  '/users/{email}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -154,6 +211,14 @@ paths:
         '200':
           description: OK
       description: Update User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
     delete:
       summary: ''
       operationId: delete-users-email
@@ -161,7 +226,7 @@ paths:
         '200':
           description: OK
       description: Delete User
-  /tenants/{tenant-name}/users:
+  '/tenants/{tenant-name}/users':
     get:
       summary: Your GET endpoint
       tags: []
@@ -175,7 +240,15 @@ paths:
         '200':
           description: OK
       description: Create Tenant User
-  /tenants/{tenant-name}/users/{email}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+  '/tenants/{tenant-name}/users/{email}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -189,6 +262,14 @@ paths:
         '200':
           description: OK
       description: Update Tenant User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name-users-email
@@ -196,13 +277,21 @@ paths:
         '200':
           description: OK
       description: Delete Tenant User
-  /domains/{domain-name}/users:
+  '/domains/{domain-name}/users':
     get:
       summary: Your GET endpoint
       tags: []
       responses: {}
       operationId: get-domains-domain-name-users
       description: List Domain Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
     post:
       summary: ''
       operationId: post-domains-domain-name-users
@@ -210,13 +299,21 @@ paths:
         '200':
           description: OK
       description: Create Domain User
-  /domains/{domain-name}/users/{email}:
+  '/domains/{domain-name}/users/{email}':
     get:
       summary: Your GET endpoint
       tags: []
       responses: {}
       operationId: get-domains-domain-name-users-email
       description: Retrieve Domain User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
     patch:
       summary: ''
       operationId: patch-domains-domain-name-users-email
@@ -245,7 +342,15 @@ paths:
         '200':
           description: OK
       description: Create Tenant
-  /tenants/{tenant-name}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+  '/tenants/{tenant-name}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -259,6 +364,14 @@ paths:
         '200':
           description: OK
       description: Update Tenant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name
@@ -285,9 +398,11 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              properties:
+                name:
+                  type: string
     parameters: []
-  /applications/{application-name}:
+  '/applications/{application-name}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -301,6 +416,14 @@ paths:
         '200':
           description: OK
       description: Update Application
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
     delete:
       summary: ''
       operationId: delete-applications-application-name
@@ -308,7 +431,7 @@ paths:
         '200':
           description: OK
       description: Delete Application
-  /tenants/{tenant-name}/applications:
+  '/tenants/{tenant-name}/applications':
     get:
       summary: Your GET endpoint
       tags: []
@@ -322,7 +445,15 @@ paths:
         '200':
           description: OK
       description: Create Tenant App
-  /tenants/{tenant-name}/applications/{application-name}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+  '/tenants/{tenant-name}/applications/{application-name}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -336,6 +467,18 @@ paths:
         '200':
           description: OK
       description: Update Tenant App
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+          application/xml:
+            schema:
+              type: object
+              properties: {}
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name-applications-application-name
@@ -343,13 +486,21 @@ paths:
         '200':
           description: OK
       description: Delete Tenant App
-  /applications/{application-name}/blocks:
+  '/applications/{application-name}/blocks':
     get:
       summary: Your GET endpoint
       tags: []
       responses: {}
       operationId: get-applications-application-name-blocks
       description: List Blocks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
     post:
       summary: ''
       operationId: post-applications-application-name-blocks
@@ -357,7 +508,15 @@ paths:
         '200':
           description: OK
       description: Create Block
-  /applications/{application-name}/blocks/{block}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+  '/applications/{application-name}/blocks/{block}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -371,6 +530,14 @@ paths:
         '200':
           description: OK
       description: Update Block
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
     delete:
       summary: ''
       operationId: delete-applications-application-name-blocks-block
@@ -378,13 +545,21 @@ paths:
         '200':
           description: OK
       description: Delete Block
-  /tenants/{tenant-name}/applications/{application-name}/blocks:
+  '/tenants/{tenant-name}/applications/{application-name}/blocks':
     get:
       summary: Your GET endpoint
       tags: []
       responses: {}
       operationId: get-tenants-tenant-name-applications-application-name-blocks
       description: List Tenant Blocks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                'n':
+                  type: string
     post:
       summary: ''
       operationId: post-tenants-tenant-name-applications-application-name-blocks
@@ -392,7 +567,15 @@ paths:
         '200':
           description: OK
       description: Create Tenant Block
-  /tenants/{tenant-name}/applications/{application-name}/blocks/{block}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+  '/tenants/{tenant-name}/applications/{application-name}/blocks/{block}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -406,6 +589,14 @@ paths:
         '200':
           description: OK
       description: Update Tenant Block
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name-applications-application-name-blocks-block
@@ -427,7 +618,15 @@ paths:
         '200':
           description: OK
       description: Create Domain
-  /domains/{domain}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                domain:
+                  type: string
+  '/domains/{domain}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -441,6 +640,16 @@ paths:
         '200':
           description: OK
       description: Update Domain
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                domain:
+                  type: string
+                active:
+                  type: boolean
     delete:
       summary: ''
       operationId: delete-domains-domain
@@ -448,7 +657,7 @@ paths:
         '200':
           description: OK
       description: Delete Domain
-  /tenants/{tenant-name}/domains:
+  '/tenants/{tenant-name}/domains':
     get:
       summary: Your GET endpoint
       tags: []
@@ -462,7 +671,15 @@ paths:
         '200':
           description: OK
       description: Create Tenant Domain
-  /tenants/{tenant-name}/domains/{domain}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                domain:
+                  type: string
+  '/tenants/{tenant-name}/domains/{domain}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -476,6 +693,17 @@ paths:
         '200':
           description: OK
       description: Update Teant Domain
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                domain:
+                  type: string
+                active:
+                  type: boolean
+        description: ''
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name-domains-domain
@@ -483,7 +711,7 @@ paths:
         '200':
           description: OK
       description: Delete Tenant Domain
-  /domains/{domain}/aliases:
+  '/domains/{domain}/aliases':
     get:
       summary: Your GET endpoint
       tags: []
@@ -497,13 +725,29 @@ paths:
         '200':
           description: OK
       description: Create Alias
-  /domains/{domain}/aliases/{alias}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                alias:
+                  type: string
+  '/domains/{domain}/aliases/{alias}':
     get:
       summary: Your GET endpoint
       tags: []
       responses: {}
       operationId: get-domains-domain-aliases-alias
       description: Retrieve Alias
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                alias:
+                  type: string
     patch:
       summary: ''
       operationId: patch-domains-domain-aliases-alias
@@ -518,13 +762,21 @@ paths:
         '200':
           description: OK
       description: Delete Alias
-  /tenants/{tenant-name}/domains/{domain}/aliases:
+  '/tenants/{tenant-name}/domains/{domain}/aliases':
     get:
       summary: Your GET endpoint
       tags: []
       responses: {}
       operationId: get-tenants-tenant-name-domains-domain-aliases
       description: List Tenant Aliases
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                alias:
+                  type: string
     post:
       summary: ''
       operationId: post-tenants-tenant-name-domains-domain-aliases
@@ -532,13 +784,21 @@ paths:
         '200':
           description: OK
       description: Create Tenant Alias
-  /tenants/{tenant-name}/domains/{domain}/aliases/{alias}:
+  '/tenants/{tenant-name}/domains/{domain}/aliases/{alias}':
     get:
       summary: Your GET endpoint
       tags: []
       responses: {}
       operationId: get-tenants-tenant-name-domains-domain-aliases-alias
       description: Retrieve Tenant Alias
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                alias:
+                  type: string
     patch:
       summary: ''
       operationId: patch-tenants-tenant-name-domains-domain-aliases-alias
@@ -553,7 +813,7 @@ paths:
         '200':
           description: OK
       description: Delete Alias
-  /domains/{domain}/applications:
+  '/domains/{domain}/applications':
     get:
       summary: Your GET endpoint
       tags: []
@@ -567,7 +827,15 @@ paths:
         '200':
           description: OK
       description: Create Apps
-  /domains/{domain}/applications/{application-name}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+  '/domains/{domain}/applications/{application-name}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -581,6 +849,16 @@ paths:
         '200':
           description: OK
       description: Update App
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                active:
+                  type: boolean
     delete:
       summary: ''
       operationId: delete-domains-domain-applications-application-name
@@ -588,7 +866,7 @@ paths:
         '200':
           description: OK
       description: Delete App
-  /tenants/{tenant-name}/domains/{domain}/applications:
+  '/tenants/{tenant-name}/domains/{domain}/applications':
     get:
       summary: Your GET endpoint
       tags: []
@@ -602,13 +880,31 @@ paths:
         '200':
           description: OK
       description: Create Tenant App
-  /tenants/{tenant-name}/domains/{domain}/applications/{application-name}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+  '/tenants/{tenant-name}/domains/{domain}/applications/{application-name}':
     get:
       summary: Your GET endpoint
       tags: []
       responses: {}
       operationId: get-tenants-tenant-name-domains-domain-applications-application-name
       description: Retrieve Tenant App
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                active:
+                  type: boolean
     patch:
       summary: ''
       operationId: patch-tenants-tenant-name-domains-domain-applications-application-name
@@ -623,7 +919,7 @@ paths:
         '200':
           description: OK
       description: Delete Tenant App
-  /tenants/{tenant-name}/domains/{domain}/applications/{application-name}/subscribers/{subscriber-msisdn}:
+  '/tenants/{tenant-name}/domains/{domain}/applications/{application-name}/subscribers/{subscriber-msisdn}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -637,6 +933,12 @@ paths:
         '200':
           description: OK
       description: Update subscriber msisdn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name-domains-domain-applications-application-name-subscribers-subscriber-msisdn
@@ -644,7 +946,7 @@ paths:
         '200':
           description: OK
       description: Delete subscriber msisdn
-  /domains/{domain}/dnids:
+  '/domains/{domain}/dnids':
     get:
       summary: Your GET endpoint
       tags: []
@@ -658,7 +960,15 @@ paths:
         '200':
           description: OK
       description: Create dnid
-  /domains/{domain}/dnids/{dnid}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                source:
+                  type: string
+  '/domains/{domain}/dnids/{dnid}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -672,6 +982,14 @@ paths:
         '200':
           description: OK
       description: Update dnid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                active:
+                  type: boolean
     delete:
       summary: ''
       operationId: delete-domains-domain-dnids-dnid
@@ -679,7 +997,7 @@ paths:
         '200':
           description: OK
       description: Delete dnid
-  /tenants/{tenant-name}/domains/{domain}/dnids:
+  '/tenants/{tenant-name}/domains/{domain}/dnids':
     get:
       summary: Your GET endpoint
       tags: []
@@ -693,7 +1011,15 @@ paths:
         '200':
           description: OK
       description: Create Tenant dnids
-  /tenants/{tenant-name}/domains/{domain}/dnids/{dnid}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                source:
+                  type: string
+  '/tenants/{tenant-name}/domains/{domain}/dnids/{dnid}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -707,6 +1033,14 @@ paths:
         '200':
           description: OK
       description: Update Tenant dnid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                active:
+                  type: boolean
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name-domains-domain-dnids-dnid
@@ -714,7 +1048,7 @@ paths:
         '200':
           description: OK
       description: Delete Tenant dnid
-  /tenants/{tenant-name}/domains/{domain}/applications/{application-name}/dnids:
+  '/tenants/{tenant-name}/domains/{domain}/applications/{application-name}/dnids':
     get:
       summary: Your GET endpoint
       tags: []
@@ -728,7 +1062,15 @@ paths:
         '200':
           description: OK
       description: Create App dnid
-  /tenants/{tenant-name}/domains/{domain}/applications/{application-name}/dnids/{dnid}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                source:
+                  type: string
+  '/tenants/{tenant-name}/domains/{domain}/applications/{application-name}/dnids/{dnid}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -742,6 +1084,15 @@ paths:
         '200':
           description: OK
       description: Update App dnid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                active:
+                  type: boolean
+        description: ''
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name-domains-domain-applications-application-name-dnids-dnid
@@ -749,7 +1100,7 @@ paths:
         '200':
           description: OK
       description: Delete App dnid
-  /domains/{domain}/trunks:
+  '/domains/{domain}/trunks':
     get:
       summary: Your GET endpoint
       tags: []
@@ -763,6 +1114,14 @@ paths:
         '200':
           description: OK
       description: Create Domain Trunk
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
   '/domains/{domain}/trunks/{trunk-name}':
     get:
       summary: Your GET endpoint
@@ -770,6 +1129,16 @@ paths:
       responses: {}
       operationId: get-domains-domain-trunks-trunk-name
       description: Retrieve Domain Trunk
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                active:
+                  type: boolean
     patch:
       summary: ''
       operationId: patch-domains-domain-trunks-trunk-name
@@ -795,7 +1164,7 @@ paths:
         name: trunk-name
         in: path
         required: true
-  /tenants/{tenant-name}/domains/{domain}/trunks:
+  '/tenants/{tenant-name}/domains/{domain}/trunks':
     get:
       summary: Your GET endpoint
       tags: []
@@ -809,7 +1178,15 @@ paths:
         '200':
           description: OK
       description: Create Tenant Domain Trunk
-  /tenants/{tenant-name}/domains/{domain}/trunks/{trunk-name}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+  '/tenants/{tenant-name}/domains/{domain}/trunks/{trunk-name}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -823,6 +1200,16 @@ paths:
         '200':
           description: OK
       description: Update Tenant Domain Trunk
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                active:
+                  type: boolean
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name-domains-domain-trunks-trunk-name
@@ -837,6 +1224,14 @@ paths:
       responses: {}
       operationId: get-trunks
       description: List Trunks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tr:
+                  type: string
     post:
       summary: ''
       operationId: post-trunks
@@ -844,7 +1239,15 @@ paths:
         '200':
           description: OK
       description: Create Trunk
-  /trunks/{trunk-name}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+  '/trunks/{trunk-name}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -858,6 +1261,16 @@ paths:
         '200':
           description: OK
       description: Update Trunk
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                active:
+                  type: boolean
     delete:
       summary: ''
       operationId: delete-trunks-trunk-name
@@ -865,7 +1278,7 @@ paths:
         '200':
           description: OK
       description: Delete Trunk
-  /tenants/{tenant-name}/trunks:
+  '/tenants/{tenant-name}/trunks':
     get:
       summary: Your GET endpoint
       tags: []
@@ -879,7 +1292,15 @@ paths:
         '200':
           description: OK
       description: Create Tenant Trunk
-  /tenants/{tenant-name}/trunks/{trunk-name}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+  '/tenants/{tenant-name}/trunks/{trunk-name}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -893,6 +1314,17 @@ paths:
         '200':
           description: OK
       description: Uppdate Tenant Trunk
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                active:
+                  type: boolean
+        description: ''
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name-trunks-trunk-name
@@ -900,7 +1332,7 @@ paths:
         '200':
           description: OK
       description: Delete Tenant Trunk
-  /domains/{domain}/subscribers:
+  '/domains/{domain}/subscribers':
     get:
       summary: Your GET endpoint
       tags: []
@@ -914,13 +1346,26 @@ paths:
         '200':
           description: OK
       description: Create subscriber
-  /domains/{domain}/subscribers/{msisdn}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+  '/domains/{domain}/subscribers/{msisdn}':
     get:
       summary: Your GET endpoint
       tags: []
       responses: {}
       operationId: get-domains-domain-subscribers-msisdn
       description: Retrieve subscriber
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                active:
+                  type: boolean
     parameters: []
     patch:
       summary: ''
@@ -936,7 +1381,7 @@ paths:
         '200':
           description: OK
       description: Delete subscriber
-  /tenants/{tenant-name}/domains/{domain}/subscribers:
+  '/tenants/{tenant-name}/domains/{domain}/subscribers':
     get:
       summary: Your GET endpoint
       tags: []
@@ -950,7 +1395,13 @@ paths:
         '200':
           description: OK
       description: Create Tenant Subscriber
-  /tenants/{tenant-name}/domains/{domain}/subscribers/{msisdn}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  '/tenants/{tenant-name}/domains/{domain}/subscribers/{msisdn}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -964,6 +1415,14 @@ paths:
         '200':
           description: OK
       description: Update Tenant Subscriber
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                active:
+                  type: boolean
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name-domains-domain-subscribers-msisdn
@@ -971,7 +1430,7 @@ paths:
         '200':
           description: OK
       description: Delete Tenant Subscriber
-  /calls/{domain}/sessions:
+  '/calls/{domain}/sessions':
     get:
       summary: Your GET endpoint
       tags: []
@@ -985,7 +1444,7 @@ paths:
         '200':
           description: OK
       description: Create session
-  /calls/{domain}/sessions/{token}:
+  '/calls/{domain}/sessions/{token}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -1006,7 +1465,7 @@ paths:
         '200':
           description: OK
       description: Delete session
-  /calls/{domain}/incoming:
+  '/calls/{domain}/incoming':
     get:
       summary: Your GET endpoint
       tags: []
@@ -1020,7 +1479,7 @@ paths:
         '200':
           description: OK
       description: Create incoming call
-  /calls/{domain}/incoming/{token}:
+  '/calls/{domain}/incoming/{token}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -1041,7 +1500,7 @@ paths:
         '200':
           description: OK
       description: Delete incoming call
-  /calls/{domain}/outgoing:
+  '/calls/{domain}/outgoing':
     get:
       summary: Your GET endpoint
       tags: []
@@ -1055,7 +1514,7 @@ paths:
         '200':
           description: OK
       description: Create outgoing call
-  /calls/{domain}/outgoing/{token}:
+  '/calls/{domain}/outgoing/{token}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -1076,7 +1535,7 @@ paths:
         '200':
           description: OK
       description: Delete outgoing call
-  /calls/{domain}/application:
+  '/calls/{domain}/application':
     get:
       summary: Your GET endpoint
       tags: []
@@ -1090,7 +1549,7 @@ paths:
         '200':
           description: OK
       description: Create App
-  /calls/{domain}/application/{token}:
+  '/calls/{domain}/application/{token}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -1111,7 +1570,7 @@ paths:
         '200':
           description: OK
       description: Delete App
-  /calls/{domain}/converences:
+  '/calls/{domain}/converences':
     get:
       summary: Your GET endpoint
       tags: []
@@ -1125,13 +1584,29 @@ paths:
         '200':
           description: OK
       description: Create converences
-  /calls/{domain}/converences/{name}:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+  '/calls/{domain}/converences/{name}':
     get:
       summary: Your GET endpoint
       tags: []
       responses: {}
       operationId: get-calls-domain-converences-name
       description: Retrieve converence
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
     patch:
       summary: ''
       operationId: patch-calls-domain-converences-name
@@ -1146,13 +1621,21 @@ paths:
         '200':
           description: OK
       description: Delete converence
-  /tenants/{tenant-name}/domains/{domain}/conferences:
+  '/tenants/{tenant-name}/domains/{domain}/conferences':
     get:
       summary: Your GET endpoint
       tags: []
       responses: {}
       operationId: get-tenants-tenant-name-domains-domain-conferences
       description: List conferences
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
     post:
       summary: ''
       operationId: post-tenants-tenant-name-domains-domain-conferences
@@ -1160,13 +1643,21 @@ paths:
         '200':
           description: OK
       description: Retrieve Conference
-  /tenants/{tenant-name}/domains/{domain}/conferences/{name}:
+  '/tenants/{tenant-name}/domains/{domain}/conferences/{name}':
     get:
       summary: Your GET endpoint
       tags: []
       responses: {}
       operationId: get-tenants-tenant-name-domains-domain-conferences-name
       description: Retrieve Conference
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
     patch:
       summary: ''
       operationId: patch-tenants-tenant-name-domains-domain-conferences-name
@@ -1188,6 +1679,6 @@ components:
       type: apiKey
       in: header
       name: Authorization
-      description: User API key for the staging from cockpit
+      description: User API key can be found through cockpit
 security:
   - staging-key: []
