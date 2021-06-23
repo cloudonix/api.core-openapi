@@ -240,14 +240,6 @@ paths:
       responses: {}
       operationId: get-domains-domain-name-users
       description: List Domain Users
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
     post:
       summary: ''
       operationId: post-domains-domain-name-users
@@ -255,13 +247,6 @@ paths:
         '200':
           description: OK
       description: Create Domain User
-  '/domains/{domain-name}/users/{email}':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-domains-domain-name-users-email
-      description: Retrieve Domain User
       requestBody:
         content:
           application/json:
@@ -270,6 +255,14 @@ paths:
               properties:
                 email:
                   type: string
+        description: ''
+  '/domains/{domain-name}/users/{email}':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-domains-domain-name-users-email
+      description: Retrieve Domain User
     delete:
       summary: ''
       operationId: delete-domains-domain-name-users-email
@@ -360,24 +353,6 @@ paths:
       responses: {}
       operationId: get-applications-application-name
       description: Retrieve Application
-    patch:
-      summary: ''
-      operationId: patch-applications-application-name
-      responses:
-        '200':
-          description: OK
-      description: Update Application
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                blocks:
-                  type: array
-                  items:
-                    type: object
-        description: ''
     delete:
       summary: ''
       operationId: delete-applications-application-name
@@ -414,27 +389,6 @@ paths:
       responses: {}
       operationId: get-tenants-tenant-name-applications-application-name
       description: Retrieve Tenant App
-    patch:
-      summary: ''
-      operationId: patch-tenants-tenant-name-applications-application-name
-      responses:
-        '200':
-          description: OK
-      description: Update Tenant App
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                blocks:
-                  type: array
-                  items:
-                    type: object
-          application/xml:
-            schema:
-              type: object
-              properties: {}
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name-applications-application-name
@@ -502,14 +456,6 @@ paths:
       responses: {}
       operationId: get-tenants-tenant-name-applications-application-name-blocks
       description: List Tenant Blocks
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
     post:
       summary: ''
       operationId: post-tenants-tenant-name-applications-application-name-blocks
@@ -580,6 +526,22 @@ paths:
                   type: string
                 profile:
                   type: object
+                application:
+                  type:
+                    - object
+                    - string
+                    - number
+                  properties:
+                    name:
+                      type: string
+                    profile:
+                      type: object
+                    type:
+                      type: string
+                    url:
+                      type: string
+                    method:
+                      type: string
   '/domains/{domain}':
     get:
       summary: Your GET endpoint
@@ -605,7 +567,21 @@ paths:
                 active:
                   type: boolean
                 application:
-                  type: object
+                  type:
+                    - object
+                    - string
+                    - number
+                  properties:
+                    name:
+                      type: string
+                    profile:
+                      type: string
+                    type:
+                      type: string
+                    url:
+                      type: string
+                    method:
+                      type: string
     delete:
       summary: ''
       operationId: delete-domains-domain
@@ -943,9 +919,9 @@ paths:
               type: object
               properties:
                 voice-application:
-                  type: object
-                messaging-application:
-                  type: object
+                  type:
+                    - string
+                    - number
                 dnid:
                   type: string
                 source:
@@ -1318,14 +1294,6 @@ paths:
       responses: {}
       operationId: get-trunks
       description: List Trunks
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                tr:
-                  type: string
     post:
       summary: ''
       operationId: post-trunks
@@ -1671,6 +1639,24 @@ paths:
         '200':
           description: OK
       description: Create incoming call
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                destination:
+                  type: string
+                callerId:
+                  type: string
+                timeLimit:
+                  type: string
+                profile:
+                  type: object
+                callback:
+                  type: string
+                routes:
+                  type: object
   '/calls/{domain}/incoming/{token}':
     get:
       summary: Your GET endpoint
@@ -1685,6 +1671,14 @@ paths:
         '200':
           description: OK
       description: Update incoming call
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                profile:
+                  type: object
     delete:
       summary: ''
       operationId: delete-calls-domain-incoming-token
@@ -1706,6 +1700,24 @@ paths:
         '200':
           description: OK
       description: Create outgoing call
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                destination:
+                  type: string
+                callerId:
+                  type: string
+                timeLimit:
+                  type: number
+                profle:
+                  type: object
+                callback:
+                  type: string
+                routes:
+                  type: object
   '/calls/{domain}/outgoing/{token}':
     get:
       summary: Your GET endpoint
@@ -1720,6 +1732,14 @@ paths:
         '200':
           description: OK
       description: Update outgoing call
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                profile:
+                  type: object
     delete:
       summary: ''
       operationId: delete-calls-domain-outgoing-token
@@ -1741,6 +1761,24 @@ paths:
         '200':
           description: OK
       description: Create App
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                destination:
+                  type: string
+                callerId:
+                  type: string
+                timeLimit:
+                  type: number
+                profile:
+                  type: object
+                callback:
+                  type: string
+                routes:
+                  type: object
   '/calls/{domain}/application/{token}':
     get:
       summary: Your GET endpoint
@@ -1755,6 +1793,14 @@ paths:
         '200':
           description: OK
       description: Update App
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                profile:
+                  type: object
     delete:
       summary: ''
       operationId: delete-calls-domain-application-token
@@ -1762,29 +1808,20 @@ paths:
         '200':
           description: OK
       description: Delete App
-  '/calls/{domain}/converences':
+  '/calls/{domain}/conferences':
     get:
       summary: Your GET endpoint
       tags: []
       responses: {}
       operationId: get-calls-domain-converences
       description: List converences
-    post:
-      summary: ''
-      operationId: post-calls-domain-converences
-      responses:
-        '200':
-          description: OK
-      description: Create converences
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-  '/calls/{domain}/converences/{name}':
+    parameters:
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+  '/calls/{domain}/conferences/{name}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -1799,13 +1836,6 @@ paths:
               properties:
                 name:
                   type: string
-    patch:
-      summary: ''
-      operationId: patch-calls-domain-converences-name
-      responses:
-        '200':
-          description: OK
-      description: Update converence
     delete:
       summary: ''
       operationId: delete-calls-domain-converences-name
@@ -1813,6 +1843,17 @@ paths:
         '200':
           description: OK
       description: Delete converence
+    parameters:
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: name
+        in: path
+        required: true
   '/tenants/{tenant-name}/domains/{domain}/conferences':
     get:
       summary: Your GET endpoint
@@ -1820,21 +1861,6 @@ paths:
       responses: {}
       operationId: get-tenants-tenant-name-domains-domain-conferences
       description: List conferences
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-    post:
-      summary: ''
-      operationId: post-tenants-tenant-name-domains-domain-conferences
-      responses:
-        '200':
-          description: OK
-      description: Retrieve Conference
   '/tenants/{tenant-name}/domains/{domain}/conferences/{name}':
     get:
       summary: Your GET endpoint
@@ -1842,21 +1868,6 @@ paths:
       responses: {}
       operationId: get-tenants-tenant-name-domains-domain-conferences-name
       description: Retrieve Conference
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-    patch:
-      summary: ''
-      operationId: patch-tenants-tenant-name-domains-domain-conferences-name
-      responses:
-        '200':
-          description: OK
-      description: Update Conference
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name-domains-domain-conferences-name
