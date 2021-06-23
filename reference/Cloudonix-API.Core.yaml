@@ -197,35 +197,6 @@ paths:
               properties:
                 email:
                   type: string
-  '/users/{email}':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-users-email
-      description: Retrieve User
-    patch:
-      summary: ''
-      operationId: patch-users-email
-      responses:
-        '200':
-          description: OK
-      description: Update User
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-    delete:
-      summary: ''
-      operationId: delete-users-email
-      responses:
-        '200':
-          description: OK
-      description: Delete User
   '/tenants/{tenant-name}/users':
     get:
       summary: Your GET endpoint
@@ -249,27 +220,6 @@ paths:
                 email:
                   type: string
   '/tenants/{tenant-name}/users/{email}':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-tenants-tenant-name-users-email
-      description: Retrieve Tenant User
-    patch:
-      summary: ''
-      operationId: patch-tenants-tenant-name-users-email
-      responses:
-        '200':
-          description: OK
-      description: Update Tenant User
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name-users-email
@@ -277,6 +227,12 @@ paths:
         '200':
           description: OK
       description: Delete Tenant User
+    get:
+      summary: ''
+      operationId: get-tenants-tenant-name-users-email
+      responses:
+        '200':
+          description: OK
   '/domains/{domain-name}/users':
     get:
       summary: Your GET endpoint
@@ -314,13 +270,6 @@ paths:
               properties:
                 email:
                   type: string
-    patch:
-      summary: ''
-      operationId: patch-domains-domain-name-users-email
-      responses:
-        '200':
-          description: OK
-      description: Update Domain User
     delete:
       summary: ''
       operationId: delete-domains-domain-name-users-email
@@ -350,6 +299,8 @@ paths:
               properties:
                 name:
                   type: string
+                profile:
+                  type: object
   '/tenants/{tenant-name}':
     get:
       summary: Your GET endpoint
@@ -370,8 +321,8 @@ paths:
             schema:
               type: object
               properties:
-                name:
-                  type: string
+                profile:
+                  type: object
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name
@@ -422,8 +373,11 @@ paths:
             schema:
               type: object
               properties:
-                name:
-                  type: string
+                blocks:
+                  type: array
+                  items:
+                    type: object
+        description: ''
     delete:
       summary: ''
       operationId: delete-applications-application-name
@@ -473,8 +427,10 @@ paths:
             schema:
               type: object
               properties:
-                name:
-                  type: string
+                blocks:
+                  type: array
+                  items:
+                    type: object
           application/xml:
             schema:
               type: object
@@ -493,14 +449,6 @@ paths:
       responses: {}
       operationId: get-applications-application-name-blocks
       description: List Blocks
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
     post:
       summary: ''
       operationId: post-applications-application-name-blocks
@@ -536,7 +484,9 @@ paths:
             schema:
               type: object
               properties:
-                name:
+                runtime:
+                  type: string
+                code:
                   type: string
     delete:
       summary: ''
@@ -558,7 +508,7 @@ paths:
             schema:
               type: object
               properties:
-                'n':
+                name:
                   type: string
     post:
       summary: ''
@@ -595,7 +545,9 @@ paths:
             schema:
               type: object
               properties:
-                name:
+                runtime:
+                  type: string
+                code:
                   type: string
     delete:
       summary: ''
@@ -626,6 +578,8 @@ paths:
               properties:
                 domain:
                   type: string
+                profile:
+                  type: object
   '/domains/{domain}':
     get:
       summary: Your GET endpoint
@@ -646,10 +600,12 @@ paths:
             schema:
               type: object
               properties:
-                domain:
-                  type: string
+                profile:
+                  type: object
                 active:
                   type: boolean
+                application:
+                  type: object
     delete:
       summary: ''
       operationId: delete-domains-domain
@@ -679,6 +635,8 @@ paths:
               properties:
                 domain:
                   type: string
+                profile:
+                  type: object
   '/tenants/{tenant-name}/domains/{domain}':
     get:
       summary: Your GET endpoint
@@ -699,10 +657,12 @@ paths:
             schema:
               type: object
               properties:
-                domain:
-                  type: string
+                profile:
+                  type: object
                 active:
                   type: boolean
+                application:
+                  type: object
         description: ''
     delete:
       summary: ''
@@ -740,21 +700,6 @@ paths:
       responses: {}
       operationId: get-domains-domain-aliases-alias
       description: Retrieve Alias
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                alias:
-                  type: string
-    patch:
-      summary: ''
-      operationId: patch-domains-domain-aliases-alias
-      responses:
-        '200':
-          description: OK
-      description: Update Alias
     delete:
       summary: ''
       operationId: delete-domains-domain-aliases-alias
@@ -769,6 +714,10 @@ paths:
       responses: {}
       operationId: get-tenants-tenant-name-domains-domain-aliases
       description: List Tenant Aliases
+    post:
+      summary: ''
+      operationId: post-tenants-tenant-name-domains-domain-aliases
+      description: Create Tenant Alias
       requestBody:
         content:
           application/json:
@@ -777,13 +726,6 @@ paths:
               properties:
                 alias:
                   type: string
-    post:
-      summary: ''
-      operationId: post-tenants-tenant-name-domains-domain-aliases
-      responses:
-        '200':
-          description: OK
-      description: Create Tenant Alias
   '/tenants/{tenant-name}/domains/{domain}/aliases/{alias}':
     get:
       summary: Your GET endpoint
@@ -791,21 +733,6 @@ paths:
       responses: {}
       operationId: get-tenants-tenant-name-domains-domain-aliases-alias
       description: Retrieve Tenant Alias
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                alias:
-                  type: string
-    patch:
-      summary: ''
-      operationId: patch-tenants-tenant-name-domains-domain-aliases-alias
-      responses:
-        '200':
-          description: OK
-      description: Update Alias
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name-domains-domain-aliases-alias
@@ -835,6 +762,14 @@ paths:
               properties:
                 name:
                   type: string
+                profile:
+                  type: object
+                type:
+                  type: string
+                url:
+                  type: string
+                method:
+                  type: string
   '/domains/{domain}/applications/{application-name}':
     get:
       summary: Your GET endpoint
@@ -855,7 +790,13 @@ paths:
             schema:
               type: object
               properties:
-                name:
+                profile:
+                  type: object
+                type:
+                  type: string
+                url:
+                  type: string
+                method:
                   type: string
                 active:
                   type: boolean
@@ -1440,10 +1381,25 @@ paths:
     post:
       summary: ''
       operationId: post-calls-domain-sessions
-      responses:
-        '200':
-          description: OK
       description: Create session
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                destination:
+                  type: string
+                callerId:
+                  type: string
+                timeLimit:
+                  type: number
+                profile:
+                  type: object
+                callback:
+                  type: string
+                routes:
+                  type: object
   '/calls/{domain}/sessions/{token}':
     get:
       summary: Your GET endpoint
@@ -1454,10 +1410,15 @@ paths:
     patch:
       summary: ''
       operationId: patch-calls-domain-sessions-token
-      responses:
-        '200':
-          description: OK
       description: Update session
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                profile:
+                  type: object
     delete:
       summary: ''
       operationId: delete-calls-domain-sessions-token
@@ -1672,6 +1633,24 @@ paths:
         '200':
           description: OK
       description: Delete Conference
+  '/users/{email}':
+    parameters:
+      - schema:
+          type: string
+        name: email
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-users-email
+    delete:
+      summary: ''
+      operationId: delete-users-email
+      responses:
+        '200':
+          description: OK
 components:
   schemas: {}
   securitySchemes:
