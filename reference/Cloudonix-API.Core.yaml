@@ -770,6 +770,8 @@ paths:
                   type: string
                 method:
                   type: string
+                status-start-ringing:
+                  type: boolean
   '/domains/{domain}/applications/{application-name}':
     get:
       summary: Your GET endpoint
@@ -800,6 +802,8 @@ paths:
                   type: string
                 active:
                   type: boolean
+                status-start-ringing:
+                  type: string
     delete:
       summary: ''
       operationId: delete-domains-domain-applications-application-name
@@ -829,6 +833,16 @@ paths:
               properties:
                 name:
                   type: string
+                profile:
+                  type: object
+                type:
+                  type: string
+                url:
+                  type: string
+                method:
+                  type: string
+                status-start-ringing:
+                  type: boolean
   '/tenants/{tenant-name}/domains/{domain}/applications/{application-name}':
     get:
       summary: Your GET endpoint
@@ -836,23 +850,29 @@ paths:
       responses: {}
       operationId: get-tenants-tenant-name-domains-domain-applications-application-name
       description: Retrieve Tenant App
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name-domains-domain-applications-application-name
+      description: Update Tenant App
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                name:
+                profile:
+                  type: object
+                type:
+                  type: string
+                url:
+                  type: string
+                method:
                   type: string
                 active:
                   type: boolean
-    patch:
-      summary: ''
-      operationId: patch-tenants-tenant-name-domains-domain-applications-application-name
-      responses:
-        '200':
-          description: OK
-      description: Update Tenant App
+                status-start-ringing:
+                  type: boolean
+        description: ''
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name-domains-domain-applications-application-name
@@ -879,7 +899,9 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              properties:
+                data:
+                  type: string
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name-domains-domain-applications-application-name-subscribers-subscriber-msisdn
@@ -887,6 +909,19 @@ paths:
         '200':
           description: OK
       description: Delete subscriber msisdn
+    post:
+      summary: ''
+      operationId: post-tenants-tenant-name-domains-domain-applications-application-name-subscribers-subscriber-msisdn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+                data:
+                  type: string
   '/domains/{domain}/dnids':
     get:
       summary: Your GET endpoint
@@ -907,8 +942,20 @@ paths:
             schema:
               type: object
               properties:
+                voice-application:
+                  type: object
+                messaging-application:
+                  type: object
+                dnid:
+                  type: string
                 source:
                   type: string
+                prefix:
+                  type: boolean
+                expression:
+                  type: boolean
+                asteriskCompatible:
+                  type: boolean
   '/domains/{domain}/dnids/{dnid}':
     get:
       summary: Your GET endpoint
@@ -929,7 +976,19 @@ paths:
             schema:
               type: object
               properties:
+                voice-application:
+                  type: object
+                messaging-application:
+                  type: object
                 active:
+                  type: boolean
+                dnid:
+                  type: string
+                prefix:
+                  type: boolean
+                expression:
+                  type: boolean
+                asteriskCompatible:
                   type: boolean
     delete:
       summary: ''
@@ -958,8 +1017,20 @@ paths:
             schema:
               type: object
               properties:
+                voice-application:
+                  type: object
+                messaging-application:
+                  type: object
+                dnid:
+                  type: string
                 source:
                   type: string
+                prefix:
+                  type: boolean
+                expression:
+                  type: boolean
+                asteriskCompatible:
+                  type: boolean
   '/tenants/{tenant-name}/domains/{domain}/dnids/{dnid}':
     get:
       summary: Your GET endpoint
@@ -980,7 +1051,19 @@ paths:
             schema:
               type: object
               properties:
+                voice-application:
+                  type: object
+                messaging-application:
+                  type: object
                 active:
+                  type: boolean
+                dnid:
+                  type: string
+                prefix:
+                  type: boolean
+                expression:
+                  type: boolean
+                asteriskCompatible:
                   type: boolean
     delete:
       summary: ''
@@ -1009,8 +1092,20 @@ paths:
             schema:
               type: object
               properties:
+                voice-application:
+                  type: object
+                messaging-application:
+                  type: object
+                dnid:
+                  type: string
                 source:
                   type: string
+                prefix:
+                  type: boolean
+                expression:
+                  type: boolean
+                asteriskCompatible:
+                  type: boolean
   '/tenants/{tenant-name}/domains/{domain}/applications/{application-name}/dnids/{dnid}':
     get:
       summary: Your GET endpoint
@@ -1031,7 +1126,19 @@ paths:
             schema:
               type: object
               properties:
+                voice-application:
+                  type: object
+                messaging-application:
+                  type: object
                 active:
+                  type: boolean
+                dnid:
+                  type: string
+                prefix:
+                  type: boolean
+                expression:
+                  type: boolean
+                asteriskCompatible:
                   type: boolean
         description: ''
     delete:
@@ -1063,6 +1170,18 @@ paths:
               properties:
                 name:
                   type: string
+                ip:
+                  type: string
+                port:
+                  type: number
+                transport:
+                  type: string
+                prefix:
+                  type: string
+                direction:
+                  type: string
+                profile:
+                  type: object
   '/domains/{domain}/trunks/{trunk-name}':
     get:
       summary: Your GET endpoint
@@ -1070,6 +1189,13 @@ paths:
       responses: {}
       operationId: get-domains-domain-trunks-trunk-name
       description: Retrieve Domain Trunk
+    patch:
+      summary: ''
+      operationId: patch-domains-domain-trunks-trunk-name
+      responses:
+        '200':
+          description: OK
+      description: Update Domain Trunk
       requestBody:
         content:
           application/json:
@@ -1078,15 +1204,18 @@ paths:
               properties:
                 name:
                   type: string
+                ip:
+                  type: number
+                transport:
+                  type: string
+                prefix:
+                  type: string
+                direction:
+                  type: string
+                profile:
+                  type: object
                 active:
                   type: boolean
-    patch:
-      summary: ''
-      operationId: patch-domains-domain-trunks-trunk-name
-      responses:
-        '200':
-          description: OK
-      description: Update Domain Trunk
     delete:
       summary: ''
       operationId: delete-domains-domain-trunks-trunk-name
@@ -1127,6 +1256,18 @@ paths:
               properties:
                 name:
                   type: string
+                ip:
+                  type: string
+                port:
+                  type: number
+                transport:
+                  type: string
+                prefix:
+                  type: string
+                direction:
+                  type: string
+                profile:
+                  type: object
   '/tenants/{tenant-name}/domains/{domain}/trunks/{trunk-name}':
     get:
       summary: Your GET endpoint
@@ -1149,6 +1290,18 @@ paths:
               properties:
                 name:
                   type: string
+                ip:
+                  type: string
+                port:
+                  type: number
+                transport:
+                  type: string
+                prefix:
+                  type: string
+                direction:
+                  type: string
+                profile:
+                  type: object
                 active:
                   type: boolean
     delete:
@@ -1188,6 +1341,18 @@ paths:
               properties:
                 name:
                   type: string
+                ip:
+                  type: string
+                port:
+                  type: number
+                transport:
+                  type: string
+                prefix:
+                  type: string
+                direction:
+                  type: string
+                profile:
+                  type: object
   '/trunks/{trunk-name}':
     get:
       summary: Your GET endpoint
@@ -1210,6 +1375,18 @@ paths:
               properties:
                 name:
                   type: string
+                ip:
+                  type: string
+                port:
+                  type: number
+                transport:
+                  type: string
+                prefix:
+                  type: string
+                direction:
+                  type: string
+                profile:
+                  type: object
                 active:
                   type: boolean
     delete:
@@ -1241,6 +1418,18 @@ paths:
               properties:
                 name:
                   type: string
+                ip:
+                  type: string
+                port:
+                  type: number
+                transport:
+                  type: string
+                prefix:
+                  type: string
+                direction:
+                  type: string
+                profile:
+                  type: object
   '/tenants/{tenant-name}/trunks/{trunk-name}':
     get:
       summary: Your GET endpoint
@@ -1263,6 +1452,18 @@ paths:
               properties:
                 name:
                   type: string
+                ip:
+                  type: string
+                port:
+                  type: number
+                transport:
+                  type: string
+                prefix:
+                  type: string
+                direction:
+                  type: string
+                profile:
+                  type: object
                 active:
                   type: boolean
         description: ''
@@ -1292,6 +1493,13 @@ paths:
           application/json:
             schema:
               type: object
+              properties:
+                msisdn:
+                  type: string
+                profile:
+                  type: object
+                sip-password:
+                  type: string
   '/domains/{domain}/subscribers/{msisdn}':
     get:
       summary: Your GET endpoint
@@ -1299,14 +1507,6 @@ paths:
       responses: {}
       operationId: get-domains-domain-subscribers-msisdn
       description: Retrieve subscriber
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                active:
-                  type: boolean
     parameters: []
     patch:
       summary: ''
@@ -1315,6 +1515,20 @@ paths:
         '200':
           description: OK
       description: Update subscriber
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msisdn:
+                  type: string
+                profile:
+                  type: object
+                active:
+                  type: boolean
+                sip-password:
+                  type: string
     delete:
       summary: ''
       operationId: delete-domains-domain-subscribers-msisdn
@@ -1342,6 +1556,16 @@ paths:
             schema:
               type: object
               properties: {}
+          application/xml:
+            schema:
+              type: object
+              properties:
+                msisdn:
+                  type: string
+                profile:
+                  type: object
+                sip-password:
+                  type: string
   '/tenants/{tenant-name}/domains/{domain}/subscribers/{msisdn}':
     get:
       summary: Your GET endpoint
@@ -1362,8 +1586,15 @@ paths:
             schema:
               type: object
               properties:
+                msisdn:
+                  type: string
+                profile:
+                  type: object
                 active:
                   type: boolean
+                sip-password:
+                  type: string
+        description: ''
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name-domains-domain-subscribers-msisdn
