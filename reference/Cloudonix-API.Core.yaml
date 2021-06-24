@@ -613,6 +613,22 @@ paths:
                   type: string
                 profile:
                   type: object
+                application:
+                  type:
+                    - object
+                    - string
+                    - number
+                  properties:
+                    name:
+                      type: string
+                    profile:
+                      type: string
+                    type:
+                      type: string
+                    url:
+                      type: string
+                    method:
+                      type: string
   '/tenants/{tenant-name}/domains/{domain}':
     get:
       summary: Your GET endpoint
@@ -638,7 +654,21 @@ paths:
                 active:
                   type: boolean
                 application:
-                  type: object
+                  type:
+                    - object
+                    - string
+                    - number
+                  properties:
+                    name:
+                      type: string
+                    profile:
+                      type: string
+                    type:
+                      type: string
+                    url:
+                      type: string
+                    method:
+                      type: string
         description: ''
     delete:
       summary: ''
@@ -885,19 +915,6 @@ paths:
         '200':
           description: OK
       description: Delete subscriber msisdn
-    post:
-      summary: ''
-      operationId: post-tenants-tenant-name-domains-domain-applications-application-name-subscribers-subscriber-msisdn
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                key:
-                  type: string
-                data:
-                  type: string
   '/domains/{domain}/dnids':
     get:
       summary: Your GET endpoint
@@ -953,9 +970,9 @@ paths:
               type: object
               properties:
                 voice-application:
-                  type: object
-                messaging-application:
-                  type: object
+                  type:
+                    - string
+                    - number
                 active:
                   type: boolean
                 dnid:
@@ -966,6 +983,7 @@ paths:
                   type: boolean
                 asteriskCompatible:
                   type: boolean
+        description: ''
     delete:
       summary: ''
       operationId: delete-domains-domain-dnids-dnid
@@ -994,9 +1012,9 @@ paths:
               type: object
               properties:
                 voice-application:
-                  type: object
-                messaging-application:
-                  type: object
+                  type:
+                    - string
+                    - number
                 dnid:
                   type: string
                 source:
@@ -1007,6 +1025,7 @@ paths:
                   type: boolean
                 asteriskCompatible:
                   type: boolean
+        description: ''
   '/tenants/{tenant-name}/domains/{domain}/dnids/{dnid}':
     get:
       summary: Your GET endpoint
@@ -1028,9 +1047,9 @@ paths:
               type: object
               properties:
                 voice-application:
-                  type: object
-                messaging-application:
-                  type: object
+                  type:
+                    - string
+                    - number
                 active:
                   type: boolean
                 dnid:
@@ -1069,9 +1088,9 @@ paths:
               type: object
               properties:
                 voice-application:
-                  type: object
-                messaging-application:
-                  type: object
+                  type:
+                    - string
+                    - number
                 dnid:
                   type: string
                 source:
@@ -1082,6 +1101,7 @@ paths:
                   type: boolean
                 asteriskCompatible:
                   type: boolean
+        description: ''
   '/tenants/{tenant-name}/domains/{domain}/applications/{application-name}/dnids/{dnid}':
     get:
       summary: Your GET endpoint
@@ -1103,9 +1123,9 @@ paths:
               type: object
               properties:
                 voice-application:
-                  type: object
-                messaging-application:
-                  type: object
+                  type:
+                    - string
+                    - number
                 active:
                   type: boolean
                 dnid:
@@ -1523,7 +1543,13 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              properties:
+                msisdn:
+                  type: string
+                profile:
+                  type: string
+                sip-password:
+                  type: string
           application/xml:
             schema:
               type: object
