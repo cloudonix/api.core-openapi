@@ -34,10 +34,6 @@ paths:
               properties:
                 name:
                   type: string
-            examples:
-              example-1:
-                value: {}
-        description: ''
   '/keys/{key-id}':
     get:
       summary: Your GET endpoint
@@ -197,6 +193,24 @@ paths:
               properties:
                 email:
                   type: string
+  '/users/{email}':
+    parameters:
+      - schema:
+          type: string
+        name: email
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-users-email
+    delete:
+      summary: ''
+      operationId: delete-users-email
+      responses:
+        '200':
+          description: OK
   '/tenants/{tenant-name}/users':
     get:
       summary: Your GET endpoint
@@ -1901,24 +1915,6 @@ paths:
         '200':
           description: OK
       description: Delete Conference
-  '/users/{email}':
-    parameters:
-      - schema:
-          type: string
-        name: email
-        in: path
-        required: true
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-users-email
-    delete:
-      summary: ''
-      operationId: delete-users-email
-      responses:
-        '200':
-          description: OK
 components:
   schemas: {}
   securitySchemes:
