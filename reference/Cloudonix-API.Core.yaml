@@ -11,21 +11,20 @@ servers:
   - url: 'https://api.cloudonix.io'
     description: Production
 paths:
-  /keys:
+  /tenants:
     get:
       summary: Your GET endpoint
       tags: []
       responses: {}
-      operationId: get-keys
-      description: List Keys
-      parameters: []
+      operationId: get-tenants
+      description: List Tenants
     post:
       summary: ''
-      operationId: post-keys
+      operationId: post-tenants
       responses:
         '200':
           description: OK
-      description: Create Key
+      description: Create Tenant
       requestBody:
         content:
           application/json:
@@ -34,37 +33,45 @@ paths:
               properties:
                 name:
                   type: string
-  '/keys/{key-id}':
+                profile:
+                  type: object
+    parameters: []
+  '/tenants/{tenant-name}':
     get:
       summary: Your GET endpoint
       tags: []
       responses: {}
-      operationId: get-keys-key-id
-      description: Retrieve Key
+      operationId: get-tenants-tenant-name
+      description: Retrieve Tenant
     patch:
       summary: ''
-      operationId: patch-keys-key-id
+      operationId: patch-tenants-tenant-name
       responses:
         '200':
           description: OK
-      description: Update Key
+      description: Update Tenant
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                name:
-                  type: string
-                active:
-                  type: boolean
+                profile:
+                  type: object
     delete:
       summary: ''
-      operationId: delete-keys-key-id
+      operationId: delete-tenants-tenant-name
       responses:
         '200':
           description: OK
-      description: Delete Key
+      description: Delete Tenant
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
   '/tenants/{tenant-name}/keys':
     get:
       summary: Your GET endpoint
@@ -87,6 +94,13 @@ paths:
               properties:
                 name:
                   type: string
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
   '/tenants/{tenant-name}/keys/{key-id}':
     get:
       summary: Your GET endpoint
@@ -118,7 +132,20 @@ paths:
         '200':
           description: OK
       description: Delete Tenant Key
-  '/domains/{domain-name}/keys':
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
+      - schema:
+          type: string
+        name: key-id
+        in: path
+        required: true
+        description: the API key ID
+  '/domains/{domain}/keys':
     get:
       summary: Your GET endpoint
       tags: []
@@ -140,7 +167,14 @@ paths:
               properties:
                 name:
                   type: string
-  '/domains/{domain-name}/keys/{key-id}':
+    parameters:
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
+  '/domains/{domain}/keys/{key-id}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -171,46 +205,19 @@ paths:
         '200':
           description: OK
       description: Delete Domain Key
-  /users:
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-users
-      description: List Users
-    post:
-      summary: ''
-      operationId: post-users
-      responses:
-        '200':
-          description: OK
-      description: Create User
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-  '/users/{email}':
     parameters:
       - schema:
           type: string
-        name: email
+        name: domain
         in: path
         required: true
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-users-email
-    delete:
-      summary: ''
-      operationId: delete-users-email
-      responses:
-        '200':
-          description: OK
+        description: your domain name or the word 'self'
+      - schema:
+          type: string
+        name: key-id
+        in: path
+        required: true
+        description: the API key ID
   '/tenants/{tenant-name}/users':
     get:
       summary: Your GET endpoint
@@ -233,21 +240,40 @@ paths:
               properties:
                 email:
                   type: string
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
   '/tenants/{tenant-name}/users/{email}':
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
+      - schema:
+          type: string
+        name: email
+        in: path
+        required: true
+        description: administrator's email
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-users-email
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name-users-email
       responses:
         '200':
           description: OK
-      description: Delete Tenant User
-    get:
-      summary: ''
-      operationId: get-tenants-tenant-name-users-email
-      responses:
-        '200':
-          description: OK
-  '/domains/{domain-name}/users':
+      description: ''
+  '/domains/{domain}/users':
     get:
       summary: Your GET endpoint
       tags: []
@@ -270,7 +296,14 @@ paths:
                 email:
                   type: string
         description: ''
-  '/domains/{domain-name}/users/{email}':
+    parameters:
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
+  '/domains/{domain}/users/{email}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -284,96 +317,19 @@ paths:
         '200':
           description: OK
       description: Delete Domain User
-  /tenants:
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-tenants
-      description: List Tenants
-    post:
-      summary: ''
-      operationId: post-tenants
-      responses:
-        '200':
-          description: OK
-      description: Create Tenant
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                profile:
-                  type: object
-  '/tenants/{tenant-name}':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-tenants-tenant-name
-      description: Retrieve Tenant
-    patch:
-      summary: ''
-      operationId: patch-tenants-tenant-name
-      responses:
-        '200':
-          description: OK
-      description: Update Tenant
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                profile:
-                  type: object
-    delete:
-      summary: ''
-      operationId: delete-tenants-tenant-name
-      responses:
-        '200':
-          description: OK
-      description: Delete Tenant
-  /applications:
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-applications
-      description: List Applications
-    post:
-      summary: ''
-      operationId: post-applications
-      responses:
-        '200':
-          description: OK
-      description: Create Application
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-    parameters: []
-  '/applications/{application-name}':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-applications-application-name
-      description: Retrieve Application
-    delete:
-      summary: ''
-      operationId: delete-applications-application-name
-      responses:
-        '200':
-          description: OK
-      description: Delete Application
+    parameters:
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
+      - schema:
+          type: string
+        name: email
+        in: path
+        required: true
+        description: administrator's email
   '/tenants/{tenant-name}/applications':
     get:
       summary: Your GET endpoint
@@ -396,6 +352,13 @@ paths:
               properties:
                 name:
                   type: string
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
   '/tenants/{tenant-name}/applications/{application-name}':
     get:
       summary: Your GET endpoint
@@ -410,59 +373,19 @@ paths:
         '200':
           description: OK
       description: Delete Tenant App
-  '/applications/{application-name}/blocks':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-applications-application-name-blocks
-      description: List Blocks
-    post:
-      summary: ''
-      operationId: post-applications-application-name-blocks
-      responses:
-        '200':
-          description: OK
-      description: Create Block
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-  '/applications/{application-name}/blocks/{block}':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-applications-application-name-blocks-block
-      description: Create Block
-    patch:
-      summary: ''
-      operationId: patch-applications-application-name-blocks-block
-      responses:
-        '200':
-          description: OK
-      description: Update Block
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                runtime:
-                  type: string
-                code:
-                  type: string
-    delete:
-      summary: ''
-      operationId: delete-applications-application-name-blocks-block
-      responses:
-        '200':
-          description: OK
-      description: Delete Block
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
+      - schema:
+          type: string
+        name: application-name
+        in: path
+        required: true
+        description: container application's name
   '/tenants/{tenant-name}/applications/{application-name}/blocks':
     get:
       summary: Your GET endpoint
@@ -485,6 +408,19 @@ paths:
               properties:
                 name:
                   type: string
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
+      - schema:
+          type: string
+        name: application-name
+        in: path
+        required: true
+        description: contianer application's name
   '/tenants/{tenant-name}/applications/{application-name}/blocks/{block}':
     get:
       summary: Your GET endpoint
@@ -516,93 +452,25 @@ paths:
         '200':
           description: OK
       description: Delete Tenant Block
-  /domains:
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-domains
-      description: List Domains
-    post:
-      summary: ''
-      operationId: post-domains
-      responses:
-        '200':
-          description: OK
-      description: Create Domain
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                domain:
-                  type: string
-                profile:
-                  type: object
-                application:
-                  type:
-                    - object
-                    - string
-                    - number
-                  properties:
-                    name:
-                      type: string
-                    profile:
-                      type: object
-                    type:
-                      type: string
-                    url:
-                      type: string
-                    method:
-                      type: string
-  '/domains/{domain}':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-domains-domain
-      description: Retrieve Domain
-    patch:
-      summary: ''
-      operationId: patch-domains-domain
-      responses:
-        '200':
-          description: OK
-      description: Update Domain
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                profile:
-                  type: object
-                active:
-                  type: boolean
-                application:
-                  type:
-                    - object
-                    - string
-                    - number
-                  properties:
-                    name:
-                      type: string
-                    profile:
-                      type: string
-                    type:
-                      type: string
-                    url:
-                      type: string
-                    method:
-                      type: string
-    delete:
-      summary: ''
-      operationId: delete-domains-domain
-      responses:
-        '200':
-          description: OK
-      description: Delete Domain
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
+      - schema:
+          type: string
+        name: application-name
+        in: path
+        required: true
+        description: contianer application's name
+      - schema:
+          type: string
+        name: block
+        in: path
+        required: true
+        description: application's block
   '/tenants/{tenant-name}/domains':
     get:
       summary: Your GET endpoint
@@ -643,6 +511,13 @@ paths:
                       type: string
                     method:
                       type: string
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
   '/tenants/{tenant-name}/domains/{domain}':
     get:
       summary: Your GET endpoint
@@ -691,559 +566,19 @@ paths:
         '200':
           description: OK
       description: Delete Tenant Domain
-  '/domains/{domain}/aliases':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-domains-domain-aliases
-      description: List Aliases
-    post:
-      summary: ''
-      operationId: post-domains-domain-aliases
-      responses:
-        '200':
-          description: OK
-      description: Create Alias
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                alias:
-                  type: string
-  '/domains/{domain}/aliases/{alias}':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-domains-domain-aliases-alias
-      description: Retrieve Alias
-    delete:
-      summary: ''
-      operationId: delete-domains-domain-aliases-alias
-      responses:
-        '200':
-          description: OK
-      description: Delete Alias
-  '/tenants/{tenant-name}/domains/{domain}/aliases':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-tenants-tenant-name-domains-domain-aliases
-      description: List Tenant Aliases
-    post:
-      summary: ''
-      operationId: post-tenants-tenant-name-domains-domain-aliases
-      description: Create Tenant Alias
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                alias:
-                  type: string
-  '/tenants/{tenant-name}/domains/{domain}/aliases/{alias}':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-tenants-tenant-name-domains-domain-aliases-alias
-      description: Retrieve Tenant Alias
-    delete:
-      summary: ''
-      operationId: delete-tenants-tenant-name-domains-domain-aliases-alias
-      responses:
-        '200':
-          description: OK
-      description: Delete Alias
-  '/domains/{domain}/applications':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-domains-domain-applications
-      description: List Apps
-    post:
-      summary: ''
-      operationId: post-domains-domain-applications
-      responses:
-        '200':
-          description: OK
-      description: Create Apps
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                profile:
-                  type: object
-                type:
-                  type: string
-                url:
-                  type: string
-                method:
-                  type: string
-                status-start-ringing:
-                  type: boolean
-  '/domains/{domain}/applications/{application-name}':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-domains-domain-applications-application-name
-      description: Retrieve App
-    patch:
-      summary: ''
-      operationId: patch-domains-domain-applications-application-name
-      responses:
-        '200':
-          description: OK
-      description: Update App
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                profile:
-                  type: object
-                type:
-                  type: string
-                url:
-                  type: string
-                method:
-                  type: string
-                active:
-                  type: boolean
-                status-start-ringing:
-                  type: string
-    delete:
-      summary: ''
-      operationId: delete-domains-domain-applications-application-name
-      responses:
-        '200':
-          description: OK
-      description: Delete App
-  '/tenants/{tenant-name}/domains/{domain}/applications':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-tenants-tenant-name-domains-domain-applications
-      description: List Tenant Apps
-    post:
-      summary: ''
-      operationId: post-tenants-tenant-name-domains-domain-applications
-      responses:
-        '200':
-          description: OK
-      description: Create Tenant App
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                profile:
-                  type: object
-                type:
-                  type: string
-                url:
-                  type: string
-                method:
-                  type: string
-                status-start-ringing:
-                  type: boolean
-  '/tenants/{tenant-name}/domains/{domain}/applications/{application-name}':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-tenants-tenant-name-domains-domain-applications-application-name
-      description: Retrieve Tenant App
-    patch:
-      summary: ''
-      operationId: patch-tenants-tenant-name-domains-domain-applications-application-name
-      description: Update Tenant App
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                profile:
-                  type: object
-                type:
-                  type: string
-                url:
-                  type: string
-                method:
-                  type: string
-                active:
-                  type: boolean
-                status-start-ringing:
-                  type: boolean
-        description: ''
-    delete:
-      summary: ''
-      operationId: delete-tenants-tenant-name-domains-domain-applications-application-name
-      responses:
-        '200':
-          description: OK
-      description: Delete Tenant App
-  '/tenants/{tenant-name}/domains/{domain}/applications/{application-name}/subscribers/{subscriber-msisdn}':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-tenants-tenant-name-domains-domain-applications-application-name-subscribers-subscriber-msisdn
-      description: Retrieve subscriber msisdn
-    patch:
-      summary: ''
-      operationId: patch-tenants-tenant-name-domains-domain-applications-application-name-subscribers-subscriber-msisdn
-      responses:
-        '200':
-          description: OK
-      description: Update subscriber msisdn
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                data:
-                  type: string
-    delete:
-      summary: ''
-      operationId: delete-tenants-tenant-name-domains-domain-applications-application-name-subscribers-subscriber-msisdn
-      responses:
-        '200':
-          description: OK
-      description: Delete subscriber msisdn
-  '/domains/{domain}/dnids':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-domains-domain-dnids
-      description: List dnids
-    post:
-      summary: ''
-      operationId: post-domains-domain-dnids
-      responses:
-        '200':
-          description: OK
-      description: Create dnid
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                voice-application:
-                  type:
-                    - string
-                    - number
-                dnid:
-                  type: string
-                source:
-                  type: string
-                prefix:
-                  type: boolean
-                expression:
-                  type: boolean
-                asteriskCompatible:
-                  type: boolean
-  '/domains/{domain}/dnids/{dnid}':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-domains-domain-dnids-dnid
-      description: Retrieve dnid
-    patch:
-      summary: ''
-      operationId: patch-domains-domain-dnids-dnid
-      responses:
-        '200':
-          description: OK
-      description: Update dnid
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                voice-application:
-                  type:
-                    - string
-                    - number
-                active:
-                  type: boolean
-                dnid:
-                  type: string
-                prefix:
-                  type: boolean
-                expression:
-                  type: boolean
-                asteriskCompatible:
-                  type: boolean
-        description: ''
-    delete:
-      summary: ''
-      operationId: delete-domains-domain-dnids-dnid
-      responses:
-        '200':
-          description: OK
-      description: Delete dnid
-  '/tenants/{tenant-name}/domains/{domain}/dnids':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-tenants-tenant-name-domains-domain-dnids
-      description: List Tenant dnids
-    post:
-      summary: ''
-      operationId: post-tenants-tenant-name-domains-domain-dnids
-      responses:
-        '200':
-          description: OK
-      description: Create Tenant dnids
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                voice-application:
-                  type:
-                    - string
-                    - number
-                dnid:
-                  type: string
-                source:
-                  type: string
-                prefix:
-                  type: boolean
-                expression:
-                  type: boolean
-                asteriskCompatible:
-                  type: boolean
-        description: ''
-  '/tenants/{tenant-name}/domains/{domain}/dnids/{dnid}':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-tenants-tenant-name-domains-domain-dnids-dnid
-      description: Retrieve Tenant dnid
-    patch:
-      summary: ''
-      operationId: patch-tenants-tenant-name-domains-domain-dnids-dnid
-      responses:
-        '200':
-          description: OK
-      description: Update Tenant dnid
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                voice-application:
-                  type:
-                    - string
-                    - number
-                active:
-                  type: boolean
-                dnid:
-                  type: string
-                prefix:
-                  type: boolean
-                expression:
-                  type: boolean
-                asteriskCompatible:
-                  type: boolean
-    delete:
-      summary: ''
-      operationId: delete-tenants-tenant-name-domains-domain-dnids-dnid
-      responses:
-        '200':
-          description: OK
-      description: Delete Tenant dnid
-  '/tenants/{tenant-name}/domains/{domain}/applications/{application-name}/dnids':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-tenants-tenant-name-domains-domain-applications-application-name-dnids
-      description: List App dnids
-    post:
-      summary: ''
-      operationId: post-tenants-tenant-name-domains-domain-applications-application-name-dnids
-      responses:
-        '200':
-          description: OK
-      description: Create App dnid
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                voice-application:
-                  type:
-                    - string
-                    - number
-                dnid:
-                  type: string
-                source:
-                  type: string
-                prefix:
-                  type: boolean
-                expression:
-                  type: boolean
-                asteriskCompatible:
-                  type: boolean
-        description: ''
-  '/tenants/{tenant-name}/domains/{domain}/applications/{application-name}/dnids/{dnid}':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-tenants-tenant-name-domains-domain-applications-application-name-dnids-dnid
-      description: Retrieve App dnid
-    patch:
-      summary: ''
-      operationId: patch-tenants-tenant-name-domains-domain-applications-application-name-dnids-dnid
-      responses:
-        '200':
-          description: OK
-      description: Update App dnid
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                voice-application:
-                  type:
-                    - string
-                    - number
-                active:
-                  type: boolean
-                dnid:
-                  type: string
-                prefix:
-                  type: boolean
-                expression:
-                  type: boolean
-                asteriskCompatible:
-                  type: boolean
-        description: ''
-    delete:
-      summary: ''
-      operationId: delete-tenants-tenant-name-domains-domain-applications-application-name-dnids-dnid
-      responses:
-        '200':
-          description: OK
-      description: Delete App dnid
-  '/domains/{domain}/trunks':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-domains-domain-trunks
-      description: List Domain trunks
-    post:
-      summary: ''
-      operationId: post-domains-domain-trunks
-      responses:
-        '200':
-          description: OK
-      description: Create Domain Trunk
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                ip:
-                  type: string
-                port:
-                  type: number
-                transport:
-                  type: string
-                prefix:
-                  type: string
-                direction:
-                  type: string
-                profile:
-                  type: object
-  '/domains/{domain}/trunks/{trunk-name}':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-domains-domain-trunks-trunk-name
-      description: Retrieve Domain Trunk
-    patch:
-      summary: ''
-      operationId: patch-domains-domain-trunks-trunk-name
-      responses:
-        '200':
-          description: OK
-      description: Update Domain Trunk
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                ip:
-                  type: number
-                transport:
-                  type: string
-                prefix:
-                  type: string
-                direction:
-                  type: string
-                profile:
-                  type: object
-                active:
-                  type: boolean
-    delete:
-      summary: ''
-      operationId: delete-domains-domain-trunks-trunk-name
-      responses:
-        '200':
-          description: OK
-      description: Delete Domain Trunk
     parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
       - schema:
           type: string
         name: domain
         in: path
         required: true
-      - schema:
-          type: string
-        name: trunk-name
-        in: path
-        required: true
+        description: your domain name or the word 'self'
   '/tenants/{tenant-name}/domains/{domain}/trunks':
     get:
       summary: Your GET endpoint
@@ -1278,6 +613,19 @@ paths:
                   type: string
                 profile:
                   type: object
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
   '/tenants/{tenant-name}/domains/{domain}/trunks/{trunk-name}':
     get:
       summary: Your GET endpoint
@@ -1321,223 +669,123 @@ paths:
         '200':
           description: OK
       description: Delete Tenant Domain Trunk
-  /trunks:
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-trunks
-      description: List Trunks
-    post:
-      summary: ''
-      operationId: post-trunks
-      responses:
-        '200':
-          description: OK
-      description: Create Trunk
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                ip:
-                  type: string
-                port:
-                  type: number
-                transport:
-                  type: string
-                prefix:
-                  type: string
-                direction:
-                  type: string
-                profile:
-                  type: object
-  '/trunks/{trunk-name}':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-trunks-trunk-name
-      description: Retrieve Trunk
-    patch:
-      summary: ''
-      operationId: patch-trunks-trunk-name
-      responses:
-        '200':
-          description: OK
-      description: Update Trunk
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                ip:
-                  type: string
-                port:
-                  type: number
-                transport:
-                  type: string
-                prefix:
-                  type: string
-                direction:
-                  type: string
-                profile:
-                  type: object
-                active:
-                  type: boolean
-    delete:
-      summary: ''
-      operationId: delete-trunks-trunk-name
-      responses:
-        '200':
-          description: OK
-      description: Delete Trunk
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
+      - schema:
+          type: string
+        name: trunk-name
+        in: path
+        required: true
+        description: domain's trunk
   '/tenants/{tenant-name}/trunks':
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
     get:
       summary: Your GET endpoint
       tags: []
       responses: {}
       operationId: get-tenants-tenant-name-trunks
-      description: List Tenant Trunks
-    post:
-      summary: ''
-      operationId: post-tenants-tenant-name-trunks
-      responses:
-        '200':
-          description: OK
-      description: Create Tenant Trunk
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                ip:
-                  type: string
-                port:
-                  type: number
-                transport:
-                  type: string
-                prefix:
-                  type: string
-                direction:
-                  type: string
-                profile:
-                  type: object
+      description: ''
   '/tenants/{tenant-name}/trunks/{trunk-name}':
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
+      - schema:
+          type: string
+        name: trunk-name
+        in: path
+        required: true
+        description: domain's trunk
     get:
       summary: Your GET endpoint
       tags: []
       responses: {}
       operationId: get-tenants-tenant-name-trunks-trunk-name
-      description: Retrieve Teant Trunk
-    patch:
-      summary: ''
-      operationId: patch-tenants-tenant-name-trunks-trunk-name
-      responses:
-        '200':
-          description: OK
-      description: Uppdate Tenant Trunk
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                ip:
-                  type: string
-                port:
-                  type: number
-                transport:
-                  type: string
-                prefix:
-                  type: string
-                direction:
-                  type: string
-                profile:
-                  type: object
-                active:
-                  type: boolean
-        description: ''
-    delete:
-      summary: ''
-      operationId: delete-tenants-tenant-name-trunks-trunk-name
-      responses:
-        '200':
-          description: OK
-      description: Delete Tenant Trunk
-  '/domains/{domain}/subscribers':
+  '/tenants/{tenant-name}/domains/{domain}/aliases':
     get:
       summary: Your GET endpoint
       tags: []
       responses: {}
-      operationId: get-domains-domain-subscribers
-      description: List subscribers
+      operationId: get-tenants-tenant-name-domains-domain-aliases
+      description: List Tenant Aliases
     post:
       summary: ''
-      operationId: post-domains-domain-subscribers
-      responses:
-        '200':
-          description: OK
-      description: Create subscriber
+      operationId: post-tenants-tenant-name-domains-domain-aliases
+      description: Create Tenant Alias
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                msisdn:
+                alias:
                   type: string
-                profile:
-                  type: object
-                sip-password:
-                  type: string
-  '/domains/{domain}/subscribers/{msisdn}':
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
+  '/tenants/{tenant-name}/domains/{domain}/aliases/{alias}':
     get:
       summary: Your GET endpoint
       tags: []
       responses: {}
-      operationId: get-domains-domain-subscribers-msisdn
-      description: Retrieve subscriber
-    parameters: []
-    patch:
-      summary: ''
-      operationId: patch-domains-domain-subscribers-msisdn
-      responses:
-        '200':
-          description: OK
-      description: Update subscriber
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                msisdn:
-                  type: string
-                profile:
-                  type: object
-                active:
-                  type: boolean
-                sip-password:
-                  type: string
+      operationId: get-tenants-tenant-name-domains-domain-aliases-alias
+      description: Retrieve Tenant Alias
     delete:
       summary: ''
-      operationId: delete-domains-domain-subscribers-msisdn
+      operationId: delete-tenants-tenant-name-domains-domain-aliases-alias
       responses:
         '200':
           description: OK
-      description: Delete subscriber
+      description: Delete Alias
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
+      - schema:
+          type: string
+        name: alias
+        in: path
+        required: true
+        description: domain's alias (internet style domain)
   '/tenants/{tenant-name}/domains/{domain}/subscribers':
     get:
       summary: Your GET endpoint
@@ -1574,6 +822,19 @@ paths:
                   type: object
                 sip-password:
                   type: string
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or word 'self'
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
   '/tenants/{tenant-name}/domains/{domain}/subscribers/{msisdn}':
     get:
       summary: Your GET endpoint
@@ -1610,6 +871,409 @@ paths:
         '200':
           description: OK
       description: Delete Tenant Subscriber
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or word 'self'
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
+      - schema:
+          type: string
+        name: msisdn
+        in: path
+        required: true
+        description: subscriber's identifier (msisdn or uuid)
+  '/tenants/{tenant-name}/domains/{domain}/applications':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-applications
+      description: List Tenant Apps
+    post:
+      summary: ''
+      operationId: post-tenants-tenant-name-domains-domain-applications
+      responses:
+        '200':
+          description: OK
+      description: Create Tenant App
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                profile:
+                  type: object
+                type:
+                  type: string
+                url:
+                  type: string
+                method:
+                  type: string
+                status-start-ringing:
+                  type: boolean
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
+  '/tenants/{tenant-name}/domains/{domain}/applications/{application-name}':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-applications-application-name
+      description: Retrieve Tenant App
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name-domains-domain-applications-application-name
+      description: Update Tenant App
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                profile:
+                  type: object
+                type:
+                  type: string
+                url:
+                  type: string
+                method:
+                  type: string
+                active:
+                  type: boolean
+                status-start-ringing:
+                  type: boolean
+        description: ''
+    delete:
+      summary: ''
+      operationId: delete-tenants-tenant-name-domains-domain-applications-application-name
+      responses:
+        '200':
+          description: OK
+      description: Delete Tenant App
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
+      - schema:
+          type: string
+        name: application-name
+        in: path
+        required: true
+        description: application connection's name
+  '/tenants/{tenant-name}/domains/{domain}/applications/{application-name}/subscribers/{msisdn}':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-applications-application-name-subscribers-subscriber-msisdn
+      description: Retrieve subscriber msisdn
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name-domains-domain-applications-application-name-subscribers-subscriber-msisdn
+      responses:
+        '200':
+          description: OK
+      description: Update subscriber msisdn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: string
+    delete:
+      summary: ''
+      operationId: delete-tenants-tenant-name-domains-domain-applications-application-name-subscribers-subscriber-msisdn
+      responses:
+        '200':
+          description: OK
+      description: Delete subscriber msisdn
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
+      - schema:
+          type: string
+        name: application-name
+        in: path
+        required: true
+        description: application connection's name
+      - schema:
+          type: string
+        name: msisdn
+        in: path
+        required: true
+        description: subscriber's identifier (msisdn or uuid)
+  '/tenants/{tenant-name}/domains/{domain}/applications/{application-name}/dnids':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-applications-application-name-dnids
+      description: List App dnids
+    post:
+      summary: ''
+      operationId: post-tenants-tenant-name-domains-domain-applications-application-name-dnids
+      responses:
+        '200':
+          description: OK
+      description: Create App dnid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                voice-application:
+                  type:
+                    - string
+                    - number
+                dnid:
+                  type: string
+                source:
+                  type: string
+                prefix:
+                  type: boolean
+                expression:
+                  type: boolean
+                asteriskCompatible:
+                  type: boolean
+        description: ''
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
+      - schema:
+          type: string
+        name: application-name
+        in: path
+        required: true
+        description: application connection's name
+  '/tenants/{tenant-name}/domains/{domain}/applications/{application-name}/dnids/{dnid}':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-applications-application-name-dnids-dnid
+      description: Retrieve App dnid
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name-domains-domain-applications-application-name-dnids-dnid
+      responses:
+        '200':
+          description: OK
+      description: Update App dnid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                voice-application:
+                  type:
+                    - string
+                    - number
+                active:
+                  type: boolean
+                dnid:
+                  type: string
+                prefix:
+                  type: boolean
+                expression:
+                  type: boolean
+                asteriskCompatible:
+                  type: boolean
+        description: ''
+    delete:
+      summary: ''
+      operationId: delete-tenants-tenant-name-domains-domain-applications-application-name-dnids-dnid
+      responses:
+        '200':
+          description: OK
+      description: Delete App dnid
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
+      - schema:
+          type: string
+        name: application-name
+        in: path
+        required: true
+        description: application connection's name
+      - schema:
+          type: string
+        name: dnid
+        in: path
+        required: true
+        description: applicaiton's dnid
+  '/tenants/{tenant-name}/domains/{domain}/dnids':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-dnids
+      description: List Tenant dnids
+    post:
+      summary: ''
+      operationId: post-tenants-tenant-name-domains-domain-dnids
+      responses:
+        '200':
+          description: OK
+      description: Create Tenant dnids
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                voice-application:
+                  type:
+                    - string
+                    - number
+                dnid:
+                  type: string
+                source:
+                  type: string
+                prefix:
+                  type: boolean
+                expression:
+                  type: boolean
+                asteriskCompatible:
+                  type: boolean
+        description: ''
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
+  '/tenants/{tenant-name}/domains/{domain}/dnids/{dnid}':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tenants-tenant-name-domains-domain-dnids-dnid
+      description: Retrieve Tenant dnid
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name-domains-domain-dnids-dnid
+      responses:
+        '200':
+          description: OK
+      description: Update Tenant dnid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                voice-application:
+                  type:
+                    - string
+                    - number
+                active:
+                  type: boolean
+                dnid:
+                  type: string
+                prefix:
+                  type: boolean
+                expression:
+                  type: boolean
+                asteriskCompatible:
+                  type: boolean
+    delete:
+      summary: ''
+      operationId: delete-tenants-tenant-name-domains-domain-dnids-dnid
+      responses:
+        '200':
+          description: OK
+      description: Delete Tenant dnid
+    parameters:
+      - schema:
+          type: string
+        name: tenant-name
+        in: path
+        required: true
+        description: your tenant account's name or the word 'self'
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
+      - schema:
+          type: string
+        name: dnid
+        in: path
+        required: true
+        description: applicaiton's dnid
   '/calls/{domain}/sessions':
     get:
       summary: Your GET endpoint
@@ -1639,6 +1303,13 @@ paths:
                   type: string
                 routes:
                   type: object
+    parameters:
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
   '/calls/{domain}/sessions/{token}':
     get:
       summary: Your GET endpoint
@@ -1665,6 +1336,19 @@ paths:
         '200':
           description: OK
       description: Delete session
+    parameters:
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
+      - schema:
+          type: string
+        name: token
+        in: path
+        required: true
+        description: session's token
   '/calls/{domain}/incoming':
     get:
       summary: Your GET endpoint
@@ -1697,6 +1381,13 @@ paths:
                   type: string
                 routes:
                   type: object
+    parameters:
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
   '/calls/{domain}/incoming/{token}':
     get:
       summary: Your GET endpoint
@@ -1726,6 +1417,19 @@ paths:
         '200':
           description: OK
       description: Delete incoming call
+    parameters:
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
+      - schema:
+          type: string
+        name: token
+        in: path
+        required: true
+        description: session's token
   '/calls/{domain}/outgoing':
     get:
       summary: Your GET endpoint
@@ -1758,6 +1462,13 @@ paths:
                   type: string
                 routes:
                   type: object
+    parameters:
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
   '/calls/{domain}/outgoing/{token}':
     get:
       summary: Your GET endpoint
@@ -1787,6 +1498,19 @@ paths:
         '200':
           description: OK
       description: Delete outgoing call
+    parameters:
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
+      - schema:
+          type: string
+        name: token
+        in: path
+        required: true
+        description: session's token
   '/calls/{domain}/application':
     get:
       summary: Your GET endpoint
@@ -1819,6 +1543,13 @@ paths:
                   type: string
                 routes:
                   type: object
+    parameters:
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
   '/calls/{domain}/application/{token}':
     get:
       summary: Your GET endpoint
@@ -1848,6 +1579,19 @@ paths:
         '200':
           description: OK
       description: Delete App
+    parameters:
+      - schema:
+          type: string
+        name: domain
+        in: path
+        required: true
+        description: your domain name or the word 'self'
+      - schema:
+          type: string
+        name: token
+        in: path
+        required: true
+        description: session's token
   '/calls/{domain}/conferences':
     get:
       summary: Your GET endpoint
@@ -1861,6 +1605,7 @@ paths:
         name: domain
         in: path
         required: true
+        description: your domain name or the word 'self'
   '/calls/{domain}/conferences/{name}':
     get:
       summary: Your GET endpoint
@@ -1889,32 +1634,13 @@ paths:
         name: domain
         in: path
         required: true
+        description: your domain name or the word 'self'
       - schema:
           type: string
         name: name
         in: path
         required: true
-  '/tenants/{tenant-name}/domains/{domain}/conferences':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-tenants-tenant-name-domains-domain-conferences
-      description: List conferences
-  '/tenants/{tenant-name}/domains/{domain}/conferences/{name}':
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-tenants-tenant-name-domains-domain-conferences-name
-      description: Retrieve Conference
-    delete:
-      summary: ''
-      operationId: delete-tenants-tenant-name-domains-domain-conferences-name
-      responses:
-        '200':
-          description: OK
-      description: Delete Conference
+        description: conference name as defined in CXML
 components:
   schemas: {}
   securitySchemes:
