@@ -1791,12 +1791,14 @@ paths:
         description: conference name as defined in CXML
 components:
   schemas:
-    API-Key:
-      title: API-Key
+    Tenant:
+      title: Tenant
       type: object
       properties:
-        id:
+        name:
           type: string
+        profile:
+          type: object
   securitySchemes:
     API-Key:
       type: apiKey
