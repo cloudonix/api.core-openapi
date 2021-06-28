@@ -15,7 +15,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants
       description: List Tenants
     post:
@@ -40,7 +42,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name
       description: Retrieve Tenant
     patch:
@@ -76,7 +80,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-keys
       description: List Tenant Keys
     post:
@@ -105,7 +111,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-keys-key-id
       description: Retrieve Tenant Key
     patch:
@@ -149,7 +157,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-domains-domain-name-keys
       description: Retrieve Domain Keys
     post:
@@ -178,7 +188,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-domains-domain-name-keys-key-id
       description: Retrieve Domain Key
     patch:
@@ -222,7 +234,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-users
       description: List Tenant Users
     post:
@@ -264,7 +278,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-users-email
     delete:
       summary: ''
@@ -277,7 +293,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-domains-domain-name-users
       description: List Domain Users
     post:
@@ -307,7 +325,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-domains-domain-name-users-email
       description: Retrieve Domain User
     delete:
@@ -334,7 +354,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-applications
       description: List Tenant Apps
     post:
@@ -363,7 +385,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-applications-application-name
       description: Retrieve Tenant App
     delete:
@@ -390,7 +414,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-applications-application-name-blocks
       description: List Tenant Blocks
     post:
@@ -425,7 +451,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-applications-application-name-blocks-block
       description: Retrieve Tenant Block
     patch:
@@ -475,7 +503,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-domains
       description: List Tenant Domains
     post:
@@ -522,7 +552,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-domains-domain
       description: Retrieve Tenant Domain
     patch:
@@ -583,7 +615,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-domains-domain-trunks
       description: List Tenant Domain Trunks
     post:
@@ -630,7 +664,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-domains-domain-trunks-trunk-name
       description: Retrieve Tenant Domain Trunk
     patch:
@@ -699,9 +735,37 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-trunks
       description: ''
+    post:
+      summary: ''
+      operationId: post-tenants-tenant-name-trunks
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                ip:
+                  type: string
+                port:
+                  type: number
+                transport:
+                  type: string
+                prefix:
+                  type: string
+                direction:
+                  type: string
+                profile:
+                  type: object
   '/tenants/{tenant-name}/trunks/{trunk-name}':
     parameters:
       - schema:
@@ -719,13 +783,51 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-trunks-trunk-name
+    patch:
+      summary: ''
+      operationId: patch-tenants-tenant-name-trunks-trunk-name
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                ip:
+                  type: string
+                port:
+                  type: number
+                transport:
+                  type: string
+                prefix:
+                  type: string
+                direction:
+                  type: string
+                profile:
+                  type: object
+                active:
+                  type: boolean
+    delete:
+      summary: ''
+      operationId: delete-tenants-tenant-name-trunks-trunk-name
+      responses:
+        '200':
+          description: OK
   '/tenants/{tenant-name}/domains/{domain}/aliases':
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-domains-domain-aliases
       description: List Tenant Aliases
     post:
@@ -740,6 +842,9 @@ paths:
               properties:
                 alias:
                   type: string
+      responses:
+        '200':
+          description: OK
     parameters:
       - schema:
           type: string
@@ -757,7 +862,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-domains-domain-aliases-alias
       description: Retrieve Tenant Alias
     delete:
@@ -790,7 +897,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-domains-domain-subscribers
       description: List Tenant Subscribers
     post:
@@ -839,7 +948,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-domains-domain-subscribers-msisdn
       description: Retrieve Tenant Subscriber
     patch:
@@ -894,7 +1005,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-domains-domain-applications
       description: List Tenant Apps
     post:
@@ -939,7 +1052,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-domains-domain-applications-application-name
       description: Retrieve Tenant App
     patch:
@@ -965,6 +1080,9 @@ paths:
                 status-start-ringing:
                   type: boolean
         description: ''
+      responses:
+        '200':
+          description: OK
     delete:
       summary: ''
       operationId: delete-tenants-tenant-name-domains-domain-applications-application-name
@@ -995,7 +1113,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-domains-domain-applications-application-name-subscribers-subscriber-msisdn
       description: Retrieve subscriber msisdn
     patch:
@@ -1049,7 +1169,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-domains-domain-applications-application-name-dnids
       description: List App dnids
     post:
@@ -1103,7 +1225,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-domains-domain-applications-application-name-dnids-dnid
       description: Retrieve App dnid
     patch:
@@ -1170,7 +1294,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-domains-domain-dnids
       description: List Tenant dnids
     post:
@@ -1218,7 +1344,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-tenants-tenant-name-domains-domain-dnids-dnid
       description: Retrieve Tenant dnid
     patch:
@@ -1278,7 +1406,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-calls-domain-sessions
       description: List sessions
     post:
@@ -1303,6 +1433,9 @@ paths:
                   type: string
                 routes:
                   type: object
+      responses:
+        '200':
+          description: OK
     parameters:
       - schema:
           type: string
@@ -1314,7 +1447,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-calls-domain-sessions-token
       description: Retrieve session
     patch:
@@ -1329,6 +1464,9 @@ paths:
               properties:
                 profile:
                   type: object
+      responses:
+        '200':
+          description: OK
     delete:
       summary: ''
       operationId: delete-calls-domain-sessions-token
@@ -1353,7 +1491,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-calls-domain-incoming
       description: List incoming calls
     post:
@@ -1392,7 +1532,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-calls-domain-incoming-token
       description: Retrieve incoming call
     patch:
@@ -1434,7 +1576,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-calls-domain-outgoing
       description: List outgoing calls
     post:
@@ -1473,7 +1617,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-calls-domain-outgoing-token
       description: Retrieve outgoing call
     patch:
@@ -1515,7 +1661,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-calls-domain-application
       description: List Apps
     post:
@@ -1554,7 +1702,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-calls-domain-application-token
       description: Retrieve App
     patch:
@@ -1596,7 +1746,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-calls-domain-converences
       description: List converences
     parameters:
@@ -1610,17 +1762,11 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-calls-domain-converences-name
       description: Retrieve converence
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
     delete:
       summary: ''
       operationId: delete-calls-domain-converences-name
