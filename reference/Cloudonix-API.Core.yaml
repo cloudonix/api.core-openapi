@@ -20,6 +20,13 @@ paths:
       responses:
         '200':
           description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tenant'
       operationId: get-tenants
       description: List Tenants
     post:
@@ -28,6 +35,7 @@ paths:
       responses:
         '200':
           description: OK
+          headers: {}
       description: Create Tenant
       requestBody:
         content:
@@ -47,6 +55,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tenant'
       operationId: get-tenants-tenant-name
       description: Retrieve Tenant
     patch:
@@ -85,6 +97,12 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Key'
       operationId: get-tenants-tenant-name-keys
       description: List Tenant Keys
     post:
@@ -116,6 +134,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Key'
       operationId: get-tenants-tenant-name-keys-key-id
       description: Retrieve Tenant Key
     patch:
@@ -162,6 +184,12 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Key'
       operationId: get-domains-domain-name-keys
       description: Retrieve Domain Keys
     post:
@@ -193,6 +221,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain'
       operationId: get-domains-domain-name-keys-key-id
       description: Retrieve Domain Key
     patch:
@@ -239,6 +271,12 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
       operationId: get-tenants-tenant-name-users
       description: List Tenant Users
     post:
@@ -283,6 +321,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
       operationId: get-tenants-tenant-name-users-email
     delete:
       summary: ''
@@ -298,6 +340,12 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
       operationId: get-domains-domain-name-users
       description: List Domain Users
     post:
@@ -330,6 +378,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
       operationId: get-domains-domain-name-users-email
       description: Retrieve Domain User
     delete:
@@ -359,6 +411,12 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Hosted-Application'
       operationId: get-tenants-tenant-name-applications
       description: List Tenant Apps
     post:
@@ -390,6 +448,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hosted-Application'
       operationId: get-tenants-tenant-name-applications-application-name
       description: Retrieve Tenant App
     delete:
@@ -419,6 +481,12 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Block'
       operationId: get-tenants-tenant-name-applications-application-name-blocks
       description: List Tenant Blocks
     post:
@@ -456,6 +524,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Block'
       operationId: get-tenants-tenant-name-applications-application-name-blocks-block
       description: Retrieve Tenant Block
     patch:
@@ -508,6 +580,12 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Domain'
       operationId: get-tenants-tenant-name-domains
       description: List Tenant Domains
     post:
@@ -557,6 +635,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain'
       operationId: get-tenants-tenant-name-domains-domain
       description: Retrieve Tenant Domain
     patch:
@@ -620,6 +702,12 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trunk'
       operationId: get-tenants-tenant-name-domains-domain-trunks
       description: List Tenant Domain Trunks
     post:
@@ -669,6 +757,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trunk'
       operationId: get-tenants-tenant-name-domains-domain-trunks-trunk-name
       description: Retrieve Tenant Domain Trunk
     patch:
@@ -740,6 +832,12 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trunk'
       operationId: get-tenants-tenant-name-trunks
       description: ''
     post:
@@ -788,6 +886,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trunk'
       operationId: get-tenants-tenant-name-trunks-trunk-name
     patch:
       summary: ''
@@ -830,6 +932,12 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Alias'
       operationId: get-tenants-tenant-name-domains-domain-aliases
       description: List Tenant Aliases
     post:
@@ -867,6 +975,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alias'
       operationId: get-tenants-tenant-name-domains-domain-aliases-alias
       description: Retrieve Tenant Alias
     delete:
@@ -902,6 +1014,12 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subscriber'
       operationId: get-tenants-tenant-name-domains-domain-subscribers
       description: List Tenant Subscribers
     post:
@@ -953,6 +1071,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscriber'
       operationId: get-tenants-tenant-name-domains-domain-subscribers-msisdn
       description: Retrieve Tenant Subscriber
     patch:
@@ -1012,6 +1134,15 @@ paths:
           description: OK
       operationId: get-tenants-tenant-name-domains-domain-applications
       description: List Tenant Apps
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Voice-Application'
+        description: |+
+
     post:
       summary: ''
       operationId: post-tenants-tenant-name-domains-domain-applications
@@ -1057,6 +1188,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Voice-Application'
       operationId: get-tenants-tenant-name-domains-domain-applications-application-name
       description: Retrieve Tenant App
     patch:
@@ -1118,6 +1253,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Voice-Application-Subscriber-Data'
       operationId: get-tenants-tenant-name-domains-domain-applications-application-name-subscribers-subscriber-msisdn
       description: Retrieve subscriber msisdn
     patch:
@@ -1174,6 +1313,12 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DNID'
       operationId: get-tenants-tenant-name-domains-domain-applications-application-name-dnids
       description: List App dnids
     post:
@@ -1230,6 +1375,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DNID'
       operationId: get-tenants-tenant-name-domains-domain-applications-application-name-dnids-dnid
       description: Retrieve App dnid
     patch:
@@ -1299,6 +1448,12 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DNID'
       operationId: get-tenants-tenant-name-domains-domain-dnids
       description: List Tenant dnids
     post:
@@ -1349,6 +1504,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DNID'
       operationId: get-tenants-tenant-name-domains-domain-dnids-dnid
       description: Retrieve Tenant dnid
     patch:
@@ -1411,6 +1570,12 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session'
       operationId: get-calls-domain-sessions
       description: List sessions
     post:
@@ -1452,6 +1617,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
       operationId: get-calls-domain-sessions-token
       description: Retrieve session
     patch:
@@ -1496,6 +1665,12 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session'
       operationId: get-calls-domain-incoming
       description: List incoming calls
     post:
@@ -1537,6 +1712,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
       operationId: get-calls-domain-incoming-token
       description: Retrieve incoming call
     patch:
@@ -1581,6 +1760,12 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session'
       operationId: get-calls-domain-outgoing
       description: List outgoing calls
     post:
@@ -1622,6 +1807,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
       operationId: get-calls-domain-outgoing-token
       description: Retrieve outgoing call
     patch:
@@ -1666,6 +1855,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
       operationId: get-calls-domain-application
       description: List Apps
     post:
@@ -1707,6 +1900,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
       operationId: get-calls-domain-application-token
       description: Retrieve App
     patch:
@@ -1751,6 +1948,12 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Conference'
       operationId: get-calls-domain-converences
       description: List converences
     parameters:
@@ -1767,6 +1970,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conference'
       operationId: get-calls-domain-converences-name
       description: Retrieve converence
     delete:
@@ -1799,6 +2006,234 @@ components:
           type: string
         profile:
           type: object
+    Key:
+      title: Key
+      type: object
+      properties:
+        tenant:
+          $ref: '#/components/schemas/Tenant'
+        domain:
+          $ref: '#/components/schemas/Domain'
+        application:
+          $ref: '#/components/schemas/Voice-Application'
+        subscriber:
+          $ref: '#/components/schemas/Subscriber'
+        user:
+          $ref: '#/components/schemas/User'
+        active:
+          type: boolean
+        name:
+          type: string
+        keyId:
+          type: string
+        secret:
+          type: string
+        type:
+          type: string
+    User:
+      title: User
+      type: object
+      properties:
+        tenantId:
+          type: number
+        domainId:
+          type: number
+        email:
+          type: string
+        authProvider:
+          type: string
+    Hosted-Application:
+      title: Hosted-Application
+      type: object
+      properties:
+        name:
+          type: string
+        url:
+          type: string
+        blocks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Block'
+    Block:
+      title: Block
+      type: object
+      properties:
+        name:
+          type: string
+        runtime:
+          type: string
+        code:
+          type: string
+        tenantId:
+          type: number
+        application:
+          type: string
+        url:
+          type: string
+    Domain:
+      title: Domain
+      type: object
+      properties:
+        tenantId:
+          type: number
+        domain:
+          type: string
+        profile:
+          type: object
+        active:
+          type: boolean
+        application:
+          type: object
+        aliases:
+          type: array
+          items:
+            type: object
+    Trunk:
+      title: Trunk
+      type: object
+      properties:
+        domainId:
+          type: number
+        name:
+          type: string
+        ip:
+          type: string
+        port:
+          type: number
+        transport:
+          type: string
+        prefix:
+          type: string
+        direction:
+          type: string
+        profile:
+          type: object
+        active:
+          type: boolean
+        metric:
+          type: number
+    Alias:
+      title: Alias
+      type: object
+      properties:
+        domainId:
+          type: number
+        alias:
+          type: string
+    Subscriber:
+      title: Subscriber
+      type: object
+      properties:
+        domainId:
+          type: number
+        msisdn:
+          type: string
+        profile:
+          type: object
+        active:
+          type: boolean
+        sip-password:
+          type: string
+    Voice-Application:
+      title: Voice-Application
+      type: object
+      properties:
+        domain:
+          $ref: '#/components/schemas/Domain'
+        name:
+          type: string
+        profile:
+          type: object
+        type:
+          type: string
+        url:
+          type: string
+        method:
+          type: string
+        active:
+          type: boolean
+    DNID:
+      title: DNID
+      type: object
+      properties:
+        domain:
+          $ref: '#/components/schemas/Domain'
+        voice-application:
+          $ref: '#/components/schemas/Voice-Application'
+        messaging-application:
+          type: object
+        source:
+          type: string
+        prefix:
+          type: boolean
+        expression:
+          type: boolean
+        asteriskCompatible:
+          type: boolean
+    Session:
+      title: Session
+      type: object
+      properties:
+        domainId:
+          type: number
+        domain:
+          $ref: '#/components/schemas/Domain'
+        subscriberId:
+          type: number
+        destination:
+          type: string
+        callerId:
+          type: string
+        direction:
+          type: string
+        token:
+          type: string
+        timeLimit:
+          type: number
+        profile:
+          type: object
+        callStatTime:
+          type: number
+        callAnswerTome:
+          type: number
+        callEndTime:
+          type: number
+        callback:
+          type: string
+        routes:
+          type: object
+        status:
+          type: string
+        error:
+          type: string
+    Conference:
+      title: Conference
+      type: object
+      properties:
+        name:
+          type: string
+        members:
+          type: number
+        tenantId:
+          type: number
+        domain:
+          type: string
+    Voice-Application-Subscriber-Data:
+      title: Voice-Application-Subscriber-Data
+      type: object
+      properties:
+        application:
+          $ref: '#/components/schemas/Voice-Application'
+        subscriber:
+          $ref: '#/components/schemas/Subscriber'
+        key:
+          type: string
+        data:
+          type: string
+        createdTime:
+          type: string
+        modifiedTime:
+          type: string
   securitySchemes:
     API-Key:
       type: apiKey
