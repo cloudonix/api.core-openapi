@@ -8,18 +8,21 @@ info:
     name: MIT
     url: 'https://opensource.org/licenses/MIT'
 servers:
-  - url: 'http://api.staging.cloudonix.io'
-    description: Staging
   - url: 'https://api.cloudonix.io'
-    description: Production
+    description: Cloudonix Production Services
+  - url: 'http://api.staging.cloudonix.io'
+    description: Cloudonix Testing Environment
 paths:
   /tenants:
     get:
-      summary: Get Tenants
-      tags: []
+      summary: List Tenants
+      description: >
+        Retrieve the list of all tenants. This is a system administrator priviliged operation.
+      tags:
+        - Tenants
       responses:
         '200':
-          description: OK
+          description: Tenant List
           headers: {}
           content:
             application/json:
@@ -28,7 +31,6 @@ paths:
                 items:
                   $ref: '#/components/schemas/Tenant'
       operationId: get-tenants
-      description: List Tenants
     post:
       summary: Create Tenant
       operationId: post-tenants
