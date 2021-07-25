@@ -12,13 +12,7 @@ jobs:
         with:
           node-version: 14
       - run: npm install widdershins
-      - run: >
-        ./node_modules/.bin/widdershins
-            --search true
-            --language_tabs 'php:PHP' 'java:Java' 'ruby:Ruby' 'python:Python'
-            --summary --yaml --theme github
-            --outfile Cloudonix-API.Core.md
-            reference/Cloudonix-API.Core.yaml
+      - run: ./node_modules/.bin/widdershins --search true --language_tabs 'php:PHP' 'java:Java' 'ruby:Ruby' 'python:Python' --summary --yaml --theme github --outfile Cloudonix-API.Core.md reference/Cloudonix-API.Core.yaml
       - name: Build documentation
         uses: docker://decathlon/slate-builder-action:2.0.0
         env:
