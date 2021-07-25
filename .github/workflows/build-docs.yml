@@ -1,0 +1,31 @@
+name: Build Slate documentation static site
+on: [push]
+
+jobs:
+  build:
+    name: Build Slate markdown from OpenAPI spec
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - run: npm install widdershins
+      - run: >
+        ./node_modules/.bin/widdershins
+            --search true
+            --language_tabs 'php:PHP' 'java:Java' 'ruby:Ruby' 'python:Python'
+            --summary --yaml --theme github
+            --outfile Cloudonix-API.Core.md
+            reference/Cloudonix-API.Core.yaml
+      - name: Build documentation
+        uses: docker://decathlon/slate-builder-action:2.0.0
+        env:
+          DOC_BASE_FOLDER = "."
+          ZIP_BUILD: false
+      - name: Deploy to GitHub Pages
+        uses: docker://maxheld83/ghpages@v0.2.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUILD_DIR: test-documentation/build/
